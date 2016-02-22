@@ -382,7 +382,7 @@ void calculate_pid(){
     
   pid_last_pitch_d_error = pid_error_temp;
     
-  //Yaw calculations
+Yaw calculations
   pid_error_temp = gyro_yaw_input - pid_yaw_setpoint;
   pid_i_mem_yaw += pid_i_gain_yaw * pid_error_temp;
   if(pid_i_mem_yaw > pid_max_yaw)pid_i_mem_yaw = pid_max_yaw;
@@ -394,5 +394,5 @@ void calculate_pid(){
     
   pid_last_yaw_d_error = pid_error_temp;
 }
-
+//this is my first edit
 
