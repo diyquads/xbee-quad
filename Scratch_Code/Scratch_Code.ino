@@ -1,11 +1,11 @@
 ////////////////HEADER FILES FOR I2C AND MPU////////////////1
-#include<String.h>
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
 #include "Wire.h"
 #endif
 ////////////////////////////////////////////////////////////
+
 
 
 
@@ -18,33 +18,10 @@ MPU6050 mpu;
 
 
 
-//////////////////////////////PID gain and limit settings////////////////////////////////////////
-
-float pid_p_gain_roll = 1.3;               //Gain setting for the roll P-controller (1.3)
-float pid_i_gain_roll = 0.3;              //Gain setting for the roll I-controller (0.3)
-float pid_d_gain_roll = 15;                //Gain setting for the roll D-controller (15)
-int pid_max_roll = 400;                    //Maximum output of the PID-controller (+/-)
-
-float pid_p_gain_pitch = pid_p_gain_roll;  //Gain setting for the pitch P-controller.
-float pid_i_gain_pitch = pid_i_gain_roll;  //Gain setting for the pitch I-controller.
-float pid_d_gain_pitch = pid_d_gain_roll;  //Gain setting for the pitch D-controller.
-int pid_max_pitch = pid_max_roll;          //Maximum output of the PID-controller (+/-)
-
-float pid_p_gain_yaw = 1;                //Gain setting for the pitch P-controller. //4.0
-float pid_i_gain_yaw = 0;               //Gain setting for the pitch I-controller. //0.02
-float pid_d_gain_yaw = 0.1;                //Gain setting for the pitch D-controller.
-int pid_max_yaw = 400;                     //Maximum output of the PID-controller (+/-)
-
-////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 ///////////////////////////VARIABLES///////////////////////////////////////////////////////////3
 
-long int start, stopp, timer, value;
-String buffera;
+long int start, stopp, timer,value,valuefr=0,valuebr=0,valuebl=0,valuefl=0;
+char buffera[100];
 char * chara;
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -68,6 +45,22 @@ float pid_error_temp;
 float pid_i_mem_roll=0, pid_roll_setpoint=0, dmp_roll_input=0, pid_output_roll=0, pid_last_roll_d_error=0;
 float pid_i_mem_pitch=0, pid_pitch_setpoint=0, dmp_pitch_input=0, pid_output_pitch=0, pid_last_pitch_d_error=0;
 float pid_i_mem_yaw=0, pid_yaw_setpoint=0, dmp_yaw_input=0, pid_output_yaw=0, pid_last_yaw_d_error=0;
+
+//PID gain and limit settings
+float pid_p_gain_roll = 1.3;               //Gain setting for the roll P-controller (1.3)
+float pid_i_gain_roll = 0.3;              //Gain setting for the roll I-controller (0.3)
+float pid_d_gain_roll = 15;                //Gain setting for the roll D-controller (15)
+int pid_max_roll = 400;                    //Maximum output of the PID-controller (+/-)
+
+float pid_p_gain_pitch = pid_p_gain_roll;  //Gain setting for the pitch P-controller.
+float pid_i_gain_pitch = pid_i_gain_roll;  //Gain setting for the pitch I-controller.
+float pid_d_gain_pitch = pid_d_gain_roll;  //Gain setting for the pitch D-controller.
+int pid_max_pitch = pid_max_roll;          //Maximum output of the PID-controller (+/-)
+
+float pid_p_gain_yaw = 4.0;                //Gain setting for the pitch P-controller. //4.0
+float pid_i_gain_yaw = 0.02;               //Gain setting for the pitch I-controller. //0.02
+float pid_d_gain_yaw = 1;                //Gain setting for the pitch D-controller.
+int pid_max_yaw = 400;                     //Maximum output of the PID-controller (+/-)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -86,11 +79,11 @@ void dmpDataReady() {
 
 /////////////////////SETTING STUFF UP/////////////////////////////////////////////////////////////////////////////////////////
 void setup() {
-	pid_roll_setpoint=0;
-	pid_pitch_setpoint=0;
-	pid_yaw_setpoint=0;
-
-
+	
+	
+	
+	
+	
 	//////////////INITIAL1ZING COMMUNICATIONS////////////5
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
 	Wire.begin();
@@ -104,8 +97,14 @@ void setup() {
 
 
 
+////////////////PORT INITIALIZATION//////////////////6
+  DDRD |= B11011000;
+  DDRB |= B00110000;
+  PORTB |= B00110000;
+  ////////////////////////////////////////////////////
 
-	///////////MPU STUFF////////////////////6
+
+	///////////MPU STUFF////////////////////7
 	mpu.initialize();
 	if (!mpu.testConnection())
 	exit(0);
@@ -118,57 +117,62 @@ void setup() {
 		dmpReady = true;
 		packetSize = mpu.dmpGetFIFOPacketSize();
 	}
+ //Your offsets: -1097 2131  2489  76  -82 9
+
+ 
+  mpu.setXAccelOffset(-1097);
+  mpu.setYAccelOffset(2131);
+  mpu.setZAccelOffset(2489);
+  mpu.setXGyroOffset(76);
+  mpu.setYGyroOffset(-82);
+  mpu.setZGyroOffset(9);
 	/////////////////////////////////////////
 
 
 
 
 
-	////////////////PORT INITIALIZATION//////////////////7
-	DDRD |= B11011000;
-	DDRB |= B00110000;
-	PORTB |= B00110000;
-	////////////////////////////////////////////////////
+	
 
 
 
 
-
-	/*///////////////ACTIVATING ESCS/////////////////8
-value = 2400;
-timer = millis();
-while ((millis() - timer) < 10000)
-{
-	start = micros();
-	PORTD |= B11011000;
-	while ((micros() - start) < value);
-	PORTD &= B00000011;
-	while (micros() - start < 50000);
-}
-timer = millis();
-value = 600;
-while (millis() - timer < 3000)
-{
-	start = micros();
-	PORTD |= B11011000;
-	while ((micros() - start) < value);
-	PORTD &= B00000011;
-	while (micros() - start < 20000);
-}
-*////////////////////////////////////////////////
+	////////////////ACTIVATING ESCS/////////////////8
+	value = 2400;
+	timer = millis();
+	while ((millis() - timer) < 5000)
+	{
+		start = micros();
+		PORTD |= B11011000;
+		while ((micros() - start) < value);
+		PORTD &= B00000011;
+		while (micros() - start < 50000);
+	}
+	timer = millis();
+	value = 600;
+	while (millis() - timer < 3000)
+	{
+		start = micros();
+		PORTD |= B11011000;
+		while ((micros() - start) < value);
+		PORTD &= B00000011;
+		while (micros() - start < 20000);
+	}
+	////////////////////////////////////////////////
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-void pid();
+
+
 ///////////////////////////////////////FEEDBACK LOOP @50Hz//////////////////////////////////////////////////////////
 void loop()
 {
 
 
 
-
+	////////////////////////GET DMP DATA//////////////////////////10
 	if (!dmpReady) return;
 	while (!mpuInterrupt && fifoCount < packetSize);
 	mpuInterrupt = false;
@@ -181,8 +185,17 @@ void loop()
 		while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
 		mpu.getFIFOBytes(fifobuffer, packetSize);
 		fifoCount -= packetSize;
+		mpu.dmpGetQuaternion(&q, fifobuffer);
+		mpu.dmpGetGravity(&gravity, &q);
+		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity); 
 	}
-	/*////////////////////////Recieve Wireless Data//////////////////////9
+	///////////////////////////////////////////////////////////////////
+
+	/////////////////////////Recieve Wireless Data//////////////////////9
+pid_roll_setpoint=0;
+pid_pitch_setpoint=0;
+pid_yaw_setpoint=0;
+/*
 if (Serial.available())
 {
 	buffera = Serial.read();
@@ -233,12 +246,7 @@ else
 
 
 
-	////////////////////////GET DMP DATA//////////////////////////10
-	mpu.dmpGetQuaternion(&q, fifobuffer);
-	mpu.dmpGetGravity(&gravity, &q);
-	mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-	///////////////////////////////////////////////////////////////////
-
+	
 
 
 
@@ -251,14 +259,22 @@ else
 
 
 
-	/*/////////////////////ESC BITBANGING//////////////////////////12
-value = 2000;
-start = micros();
-PORTD |= B11011000;
-while ((micros() - start) < value);
-PORTD &= B0000011;
-while (micros() - start < 20000);
-*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////ESC BITBANGING//////////////////////////12
+	//7=br
+	//6=bl
+	//4=fr
+	//3=fl
+	start = micros();
+	PORTD |= B11011000;
+	while ((micros() - start) < 3000)
+	{
+		if(micros()-start<valuebr) PORTD &= B01011011;
+		if(micros()-start<valuebl) PORTD &= B10011011;
+		if(micros()-start<valuefr) PORTD &= B11001011;
+		if(micros()-start<valuefl) PORTD &= B11010011;
+	}
+	while (micros() - start < 20000);
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 
@@ -267,9 +283,9 @@ while (micros() - start < 20000);
 //////////////////////////Subroutine to Calculate PID Controller Correction Values///////////////13
 void pid()
 {
-	dmp_roll_input = ypr[2] ;
-	dmp_pitch_input = ypr[1] ;
-	dmp_yaw_input = ypr[0] ;
+	dmp_roll_input = ypr[2]*180/M_PI ;
+	dmp_pitch_input = ypr[1] *180/M_PI;
+	dmp_yaw_input = ypr[0] *180/M_PI;
 
 	//Roll calculations
 	pid_error_temp = dmp_roll_input - pid_roll_setpoint;
@@ -282,7 +298,8 @@ void pid()
 	else if (pid_output_roll < pid_max_roll * -1)pid_output_roll = pid_max_roll * -1;
 
 	pid_last_roll_d_error = pid_error_temp;
-	Serial.print(pid_output_roll,DEC);Serial.print('\t');Serial.print(ypr[2]*180/M_PI,DEC);Serial.print('\t');
+	Serial.print(pid_output_roll,DEC);Serial.print('\t');
+	Serial.print(ypr[2]*180/M_PI,DEC);Serial.print('\t');
 	//Pitch calculations
 	pid_error_temp = dmp_pitch_input - pid_pitch_setpoint;
 	pid_i_mem_pitch += pid_i_gain_pitch * pid_error_temp;
@@ -294,7 +311,8 @@ void pid()
 	else if (pid_output_pitch < pid_max_pitch * -1)pid_output_pitch = pid_max_pitch * -1;
 
 	pid_last_pitch_d_error = pid_error_temp;
-	Serial.print(pid_output_pitch,DEC);Serial.print('\t');Serial.print(ypr[1]*180/M_PI,DEC);Serial.print('\t');
+	Serial.print(pid_output_pitch,DEC);Serial.print('\t');
+	Serial.print(ypr[1]*180/M_PI,DEC);Serial.print('\t');
 	//Yaw calculations
 	pid_error_temp = dmp_yaw_input - pid_yaw_setpoint;
 	pid_i_mem_yaw += pid_i_gain_yaw * pid_error_temp;
@@ -306,6 +324,6 @@ void pid()
 	else if (pid_output_yaw < pid_max_yaw * -1)pid_output_yaw = pid_max_yaw * -1;
 
 	pid_last_yaw_d_error = pid_error_temp;
-	Serial.print(pid_output_yaw,DEC);Serial.println('\t');Serial.print(ypr[0]*180/M_PI,DEC);Serial.print('\t');
+	Serial.print(pid_output_yaw,DEC);Serial.print('\t');Serial.print(ypr[0]*180/M_PI,DEC);Serial.println('\t');
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
