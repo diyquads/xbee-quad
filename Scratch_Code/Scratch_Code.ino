@@ -159,6 +159,7 @@ void setup() {
 		while (micros() - start < 20000);
 	}
 	////////////////////////////////////////////////
+  
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -264,14 +265,26 @@ else
 	//6=bl
 	//4=fr
 	//3=fl
+  //clockwise yaw +ve
+  //right roll +ve
+  //backwards pitch +ve
+  value=700;
+  valuebr=((  pid_output_yaw  -   pid_output_pitch  -   pid_output_roll)  *value/400) + value;
+	if(valuebr<580)valuebr=580;if(valuebr>1200)valuebr=1200;
+	valuebl=((  -pid_output_yaw -   pid_output_pitch  +   pid_output_roll) *value/400) +value;
+  if(valuebl<580)valuebl=580;if(valuebl>1200)valuebl=1200;
+  valuefr=((  -pid_output_yaw +   pid_output_pitch  -   pid_output_roll)  *value/400) +value;
+  if(valuefr<580)valuefr=580;if(valuefr>1200)valuefr=1200;
+  valuefl=((  pid_output_yaw  +   pid_output_pitch  +   pid_output_roll)  *value/400) +value;
+	if(valuefl<580)valuefl=580;if(valuefl>1200)valuefl=1200;
 	start = micros();
 	PORTD |= B11011000;
 	while ((micros() - start) < 3000)
 	{
-		if(micros()-start<valuebr) PORTD &= B01011011;
-		if(micros()-start<valuebl) PORTD &= B10011011;
-		if(micros()-start<valuefr) PORTD &= B11001011;
-		if(micros()-start<valuefl) PORTD &= B11010011;
+		if(micros()-start>valuebr) PORTD &= B01011011;
+		if(micros()-start>valuebl) PORTD &= B10011011;
+		if(micros()-start>valuefr) PORTD &= B11001011;
+		if(micros()-start>valuefl) PORTD &= B11010011;
 	}
 	while (micros() - start < 20000);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,9 +296,9 @@ else
 //////////////////////////Subroutine to Calculate PID Controller Correction Values///////////////13
 void pid()
 {
-	dmp_roll_input = ypr[2]*180/M_PI ;
-	dmp_pitch_input = ypr[1] *180/M_PI;
-	dmp_yaw_input = ypr[0] *180/M_PI;
+	dmp_roll_input = -ypr[2]*180/M_PI ;
+	dmp_pitch_input = -ypr[1] *180/M_PI;
+	dmp_yaw_input = -ypr[0] *180/M_PI;
 
 	//Roll calculations
 	pid_error_temp = dmp_roll_input - pid_roll_setpoint;
