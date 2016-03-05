@@ -86,6 +86,7 @@ void dmpDataReady() {
 
 /////////////////////SETTING STUFF UP/////////////////////////////////////////////////////////////////////////////////////////
 void setup() {
+<<<<<<< HEAD
 pid_roll_setpoint=0;
 pid_pitch_setpoint=0;
 pid_yaw_setpoint=0;
@@ -100,11 +101,28 @@ pid_yaw_setpoint=0;
 #endif
   Serial.begin(115200);
   /////////////////////////////////////////////////////
+=======
+	pid_roll_setpoint=0;
+	pid_pitch_setpoint=0;
+	pid_yaw_setpoint=0;
+
+
+	//////////////INITIAL1ZING COMMUNICATIONS////////////5
+#if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
+	Wire.begin();
+	TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz). Comment this line if having compilation difficulties with TWBR.
+#elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
+	Fastwire::setup(400, true);
+#endif
+	Serial.begin(115200);
+	/////////////////////////////////////////////////////
+>>>>>>> faa0f6219f840be9bcd052649f3e9a97f6c6070e
 
 
 
 
 
+<<<<<<< HEAD
   ///////////MPU STUFF////////////////////6
   mpu.initialize();
   if (!mpu.testConnection())
@@ -119,21 +137,46 @@ pid_yaw_setpoint=0;
     packetSize = mpu.dmpGetFIFOPacketSize();
   }
   /////////////////////////////////////////
+=======
+	///////////MPU STUFF////////////////////6
+	mpu.initialize();
+	if (!mpu.testConnection())
+	exit(0);
+	devStatus = mpu.dmpInitialize();
+	if (devStatus == 0)
+	{
+		mpu.setDMPEnabled(true);
+		attachInterrupt(0, dmpDataReady, RISING);
+		mpuIntStatus = mpu.getIntStatus();
+		dmpReady = true;
+		packetSize = mpu.dmpGetFIFOPacketSize();
+	}
+	/////////////////////////////////////////
+>>>>>>> faa0f6219f840be9bcd052649f3e9a97f6c6070e
 
 
 
 
 
+<<<<<<< HEAD
   ////////////////PORT INITIALIZATION//////////////////7
   DDRD |= B11011000;
   DDRB |= B00110000;
   PORTB |= B00110000;
   ////////////////////////////////////////////////////
+=======
+	////////////////PORT INITIALIZATION//////////////////7
+	DDRD |= B11011000;
+	DDRB |= B00110000;
+	PORTB |= B00110000;
+	////////////////////////////////////////////////////
+>>>>>>> faa0f6219f840be9bcd052649f3e9a97f6c6070e
 
 
 
 
 
+<<<<<<< HEAD
   /*///////////////ACTIVATING ESCS/////////////////8
   value = 2400;
   timer = millis();
@@ -156,6 +199,30 @@ pid_yaw_setpoint=0;
     while (micros() - start < 20000);
   }
   *////////////////////////////////////////////////
+=======
+	/*///////////////ACTIVATING ESCS/////////////////8
+value = 2400;
+timer = millis();
+while ((millis() - timer) < 10000)
+{
+	start = micros();
+	PORTD |= B11011000;
+	while ((micros() - start) < value);
+	PORTD &= B00000011;
+	while (micros() - start < 50000);
+}
+timer = millis();
+value = 600;
+while (millis() - timer < 3000)
+{
+	start = micros();
+	PORTD |= B11011000;
+	while ((micros() - start) < value);
+	PORTD &= B00000011;
+	while (micros() - start < 20000);
+}
+*////////////////////////////////////////////////
+>>>>>>> faa0f6219f840be9bcd052649f3e9a97f6c6070e
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -165,6 +232,72 @@ void pid();
 ///////////////////////////////////////FEEDBACK LOOP @50Hz//////////////////////////////////////////////////////////
 void loop()
 {
+<<<<<<< HEAD
+=======
+
+
+
+
+	if (!dmpReady) return;
+	while (!mpuInterrupt && fifoCount < packetSize);
+	mpuInterrupt = false;
+	mpuIntStatus = mpu.getIntStatus();
+	fifoCount = mpu.getFIFOCount();
+	if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+		mpu.resetFIFO();
+		Serial.println(F("FIFO overflow!"));
+	} else if (mpuIntStatus & 0x02) {
+		while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
+		mpu.getFIFOBytes(fifobuffer, packetSize);
+		fifoCount -= packetSize;
+	}
+	/*////////////////////////Recieve Wireless Data//////////////////////9
+if (Serial.available())
+{
+	buffera = Serial.read();
+	buffera.toCharArray(chara,20);
+	if (*chara == 'y')
+	{
+	chara++;
+	buffera = chara;
+	pid_yaw_setpoint = buffera.toFloat();
+	}
+	else if (*chara == 'p')
+	{
+	chara++;
+	buffera = chara;
+	pid_pitch_setpoint = buffera.toFloat();
+	}
+	else if (*chara == 'r')
+	{
+	chara++;
+	buffera = chara;
+	pid_roll_setpoint = buffera.toFloat();
+	}
+	else if (*chara == 'a')
+	{
+	chara++;
+	buffera = chara;
+	value = buffera.toFloat();
+	}
+}
+else
+{
+	if (pid_pitch_setpoint > 10)
+	pid_pitch_setpoint /= 2;
+	else
+	pid_pitch_setpoint = 0;
+	if (pid_roll_setpoint > 10)
+	pid_roll_setpoint /= 2;
+	else
+	pid_roll_setpoint = 0;
+	if (pid_yaw_setpoint > 10)
+	pid_yaw_setpoint /= 2;
+	else
+	pid_yaw_setpoint = 0;
+}
+*////////////////////////////////////////////////////////////////////////
+>>>>>>> faa0f6219f840be9bcd052649f3e9a97f6c6070e
 
 
 
@@ -262,12 +395,44 @@ void loop()
   */////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
+<<<<<<< HEAD
+=======
+	////////////////////////GET DMP DATA//////////////////////////10
+	mpu.dmpGetQuaternion(&q, fifobuffer);
+	mpu.dmpGetGravity(&gravity, &q);
+	mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+	///////////////////////////////////////////////////////////////////
+
+
+
+
+
+	//////////////////////CALL PID/////////////////////////////////////11
+	pid();
+	/////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	/*/////////////////////ESC BITBANGING//////////////////////////12
+value = 2000;
+start = micros();
+PORTD |= B11011000;
+while ((micros() - start) < value);
+PORTD &= B0000011;
+while (micros() - start < 20000);
+*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+>>>>>>> faa0f6219f840be9bcd052649f3e9a97f6c6070e
 
 
 
 //////////////////////////Subroutine to Calculate PID Controller Correction Values///////////////13
 void pid()
 {
+<<<<<<< HEAD
   dmp_roll_input = ypr[2] ;
   dmp_pitch_input = ypr[1] ;
   dmp_yaw_input = ypr[0] ;
@@ -311,3 +476,47 @@ Serial.print(pid_output_yaw,DEC);Serial.println('\t');Serial.print(ypr[0]*180/M_
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+=======
+	dmp_roll_input = ypr[2] ;
+	dmp_pitch_input = ypr[1] ;
+	dmp_yaw_input = ypr[0] ;
+
+	//Roll calculations
+	pid_error_temp = dmp_roll_input - pid_roll_setpoint;
+	pid_i_mem_roll += pid_i_gain_roll * pid_error_temp;
+	if (pid_i_mem_roll > pid_max_roll)pid_i_mem_roll = pid_max_roll;
+	else if (pid_i_mem_roll < pid_max_roll * -1)pid_i_mem_roll = pid_max_roll * -1;
+
+	pid_output_roll = pid_p_gain_roll * pid_error_temp + pid_i_mem_roll + pid_d_gain_roll * (pid_error_temp - pid_last_roll_d_error);
+	if (pid_output_roll > pid_max_roll)pid_output_roll = pid_max_roll;
+	else if (pid_output_roll < pid_max_roll * -1)pid_output_roll = pid_max_roll * -1;
+
+	pid_last_roll_d_error = pid_error_temp;
+	Serial.print(pid_output_roll,DEC);Serial.print('\t');Serial.print(ypr[2]*180/M_PI,DEC);Serial.print('\t');
+	//Pitch calculations
+	pid_error_temp = dmp_pitch_input - pid_pitch_setpoint;
+	pid_i_mem_pitch += pid_i_gain_pitch * pid_error_temp;
+	if (pid_i_mem_pitch > pid_max_pitch)pid_i_mem_pitch = pid_max_pitch;
+	else if (pid_i_mem_pitch < pid_max_pitch * -1)pid_i_mem_pitch = pid_max_pitch * -1;
+
+	pid_output_pitch = pid_p_gain_pitch * pid_error_temp + pid_i_mem_pitch + pid_d_gain_pitch * (pid_error_temp - pid_last_pitch_d_error);
+	if (pid_output_pitch > pid_max_pitch)pid_output_pitch = pid_max_pitch;
+	else if (pid_output_pitch < pid_max_pitch * -1)pid_output_pitch = pid_max_pitch * -1;
+
+	pid_last_pitch_d_error = pid_error_temp;
+	Serial.print(pid_output_pitch,DEC);Serial.print('\t');Serial.print(ypr[1]*180/M_PI,DEC);Serial.print('\t');
+	//Yaw calculations
+	pid_error_temp = dmp_yaw_input - pid_yaw_setpoint;
+	pid_i_mem_yaw += pid_i_gain_yaw * pid_error_temp;
+	if (pid_i_mem_yaw > pid_max_yaw)pid_i_mem_yaw = pid_max_yaw;
+	else if (pid_i_mem_yaw < pid_max_yaw * -1)pid_i_mem_yaw = pid_max_yaw * -1;
+
+	pid_output_yaw = pid_p_gain_yaw * pid_error_temp + pid_i_mem_yaw + pid_d_gain_yaw * (pid_error_temp - pid_last_yaw_d_error);
+	if (pid_output_yaw > pid_max_yaw)pid_output_yaw = pid_max_yaw;
+	else if (pid_output_yaw < pid_max_yaw * -1)pid_output_yaw = pid_max_yaw * -1;
+
+	pid_last_yaw_d_error = pid_error_temp;
+	Serial.print(pid_output_yaw,DEC);Serial.println('\t');Serial.print(ypr[0]*180/M_PI,DEC);Serial.print('\t');
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+>>>>>>> faa0f6219f840be9bcd052649f3e9a97f6c6070e
