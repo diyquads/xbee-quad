@@ -1,0 +1,473 @@
+Terminal log file
+Date: 07-Mar-16 - 2:59:50 AM
+-----------------------------------------------
+GET READY
+Initializing MPU
+MPU Connection Succesful
+Sampling9453132
+Wireless Data		9454208
+pid loop		9454696
+ESC Bitbanging		9455504
+End			9459140
+Sampling9460396
+Wireless Data		9470260
+pid loop		9470736
+ESC Bitbanging		9471956
+End			9479148
+Sampling9479624
+Wireless Data		9490180
+pid loop		9490668
+ESC Bitbanging		9491608
+End			9499156
+Sampling9499628
+Wireless Data		9510092
+pid loop		9510576
+ESC Bitbanging		9511508
+End			9519172
+Sampling9519636
+Wireless Data		9530064
+pid loop		9530552
+ESC Bitbanging		9531488
+End			9539168
+Sampling9539648
+Wireless Data		9550028
+pid loop		9550512
+ESC Bitbanging		9551448
+End			9559168
+Sampling9559640
+Wireless Data		9569996
+pid loop		9570488
+ESC Bitbanging		9571420
+End			9579168
+Sampling9579648
+Wireless Data		9589944
+pid loop		9590428
+ESC Bitbanging		9591360
+End			9599184
+Sampling9599648
+Wireless Data		9609896
+pid loop		9610384
+ESC Bitbanging		9611320
+End			9619184
+Sampling9619664
+Wireless Data		9629872
+pid loop		9630356
+ESC Bitbanging		9631288
+End			9639180
+Sampling9639652
+Wireless Data		9649872
+pid loop		9650360
+ESC Bitbanging		9651296
+End			9659184
+Sampling9659664
+Wireless Data		9669796
+pid loop		9670280
+ESC Bitbanging		9671212
+End			9679192
+Sampling9679664
+Wireless Data		9689780
+pid loop		9690268
+ESC Bitbanging		9691200
+End			9699200
+Sampling9699672
+Wireless Data		9709732
+pid loop		9710216
+ESC Bitbanging		9711148
+End			9719200
+Sampling9719672
+Wireless Data		9729716
+pid loop		9730208
+ESC Bitbanging		9731144
+End			9739204
+Sampling9739680
+Wireless Data		9749656
+pid loop		9750140
+ESC Bitbanging		9751080
+End			9759208
+Sampling9759676
+Wireless Data		9769628
+pid loop		9770116
+ESC Bitbanging		9771056
+End			9779224
+Sampling9779684
+Wireless Data		9789604
+pid loop		9790088
+ESC Bitbanging		9791028
+End			9799220
+Sampling9799696
+Wireless Data		9809576
+pid loop		9810068
+ESC Bitbanging		9811004
+End			9819216
+Sampling9819684
+Wireless Data		9829508
+pid loop		9829996
+ESC Bitbanging		9830932
+End			9839216
+Sampling9839692
+Wireless Data		9849500
+pid loop		9849988
+ESC Bitbanging		9850928
+End			9859224
+Sampling9859692
+Wireless Data		9869456
+pid loop		9869940
+ESC Bitbanging		9870876
+End			9879236
+Sampling9879712
+Wireless Data		9889428
+pid loop		9889916
+ESC Bitbanging		9890856
+End			9899236
+Sampling9899704
+Wireless Data		9909384
+pid loop		9909868
+ESC Bitbanging		9910800
+End			9919236
+Sampling9919716
+Wireless Data		9929368
+pid loop		9929860
+ESC Bitbanging		9930796
+End			9939244
+Sampling9939712
+Wireless Data		9949328
+pid loop		9949812
+ESC Bitbanging		9950748
+End			9959256
+Sampling9959724
+Wireless Data		9969296
+pid loop		9969784
+ESC Bitbanging		9970720
+End			9979256
+Sampling9979728
+Wireless Data		9989272
+pid loop		9989756
+ESC Bitbanging		9990696
+End			9999252
+Sampling9999728
+Wireless Data		10009228
+pid loop		10009768
+ESC Bitbanging		10010744
+End			10019260
+Sampling10019776
+Wireless Data		10029196
+pid loop		10029724
+ESC Bitbanging		10030704
+End			10039264
+Sampling10039796
+Wireless Data		10049164
+pid loop		10049700
+ESC Bitbanging		10050680
+End			10059272
+Sampling10059796
+Wireless Data		10069124
+pid loop		10069656
+ESC Bitbanging		10070640
+End			10079280
+Sampling10079796
+Wireless Data		10089084
+pid loop		10089620
+ESC Bitbanging		10090604
+End			10099276
+Sampling10099800
+Wireless Data		10109052
+pid loop		10109584
+ESC Bitbanging		10110568
+End			10119280
+Sampling10119796
+Wireless Data		10129028
+pid loop		10129568
+ESC Bitbanging		10130548
+End			10139296
+Sampling10139820
+Wireless Data		10148996
+pid loop		10149528
+ESC Bitbanging		10150512
+End			10159296
+Sampling10159816
+Wireless Data		10168940
+pid loop		10169476
+ESC Bitbanging		10170460
+End			10179292
+Sampling10179816
+Wireless Data		10188920
+pid loop		10189448
+ESC Bitbanging		10190432
+End			10199300
+Sampling10199816
+Wireless Data		10208876
+pid loop		10209416
+ESC Bitbanging		10210400
+End			10219308
+Sampling10219836
+Wireless Data		10228856
+pid loop		10229384
+ESC Bitbanging		10230372
+End			10239312
+Sampling10239832
+Wireless Data		10248812
+pid loop		10249344
+ESC Bitbanging		10250328
+End			10259312
+Sampling10259832
+Wireless Data		10268780
+pid loop		10269308
+ESC Bitbanging		10270292
+End			10279316
+Sampling10279832
+Wireless Data		10288780
+pid loop		10289316
+ESC Bitbanging		10290296
+End			10299316
+Sampling10299840
+Wireless Data		10308708
+pid loop		10309240
+ESC Bitbanging		10310220
+End			10319328
+Sampling10319848
+Wireless Data		10328680
+pid loop		10329216
+ESC Bitbanging		10330196
+End			10339340
+Sampling10339856
+Wireless Data		10348648
+pid loop		10349176
+ESC Bitbanging		10350160
+End			10359336
+Sampling10359860
+Wireless Data		10368612
+pid loop		10369148
+ESC Bitbanging		10370132
+End			10379340
+Sampling10379860
+Wireless Data		10388584
+pid loop		10389112
+ESC Bitbanging		10390096
+End			10399356
+Sampling10399880
+Wireless Data		10408544
+pid loop		10409080
+ESC Bitbanging		10410060
+End			10419356
+Sampling10419872
+Wireless Data		10428512
+pid loop		10429044
+ESC Bitbanging		10430032
+End			10439352
+Sampling10439876
+Wireless Data		10448484
+pid loop		10449020
+ESC Bitbanging		10450000
+End			10459356
+Sampling10459876
+Wireless Data		10468432
+pid loop		10468960
+ESC Bitbanging		10469948
+End			10479368
+Sampling10479892
+Wireless Data		10488432
+pid loop		10488968
+ESC Bitbanging		10489952
+End			10499372
+Sampling10499888
+Wireless Data		10508364
+pid loop		10508896
+ESC Bitbanging		10509876
+End			10519372
+Sampling10519892
+Wireless Data		10528344
+pid loop		10528880
+ESC Bitbanging		10529860
+End			10539372
+Sampling10539888
+Wireless Data		10548320
+pid loop		10548848
+ESC Bitbanging		10549832
+End			10559376
+Sampling10559900
+Wireless Data		10568256
+pid loop		10568792
+ESC Bitbanging		10569776
+End			10579392
+Sampling10579908
+Wireless Data		10588240
+pid loop		10588768
+ESC Bitbanging		10589748
+End			10599392
+Sampling10599916
+Wireless Data		10608204
+pid loop		10608740
+ESC Bitbanging		10609716
+End			10619388
+Sampling10619912
+Wireless Data		10628172
+pid loop		10628704
+ESC Bitbanging		10629684
+End			10639400
+Sampling10639916
+Wireless Data		10648136
+pid loop		10648672
+ESC Bitbanging		10649656
+End			10659396
+Sampling10659924
+Wireless Data		10668112
+pid loop		10668640
+ESC Bitbanging		10669624
+End			10679408
+Sampling10679924
+Wireless Data		10688072
+pid loop		10688608
+ESC Bitbanging		10689588
+End			10699408
+Sampling10699932
+Wireless Data		10708040
+pid loop		10708572
+ESC Bitbanging		10709552
+End			10719416
+Sampling10719932
+Wireless Data		10728004
+pid loop		10728540
+ESC Bitbanging		10729524
+End			10739416
+Sampling10739940
+Wireless Data		10747976
+pid loop		10748508
+ESC Bitbanging		10749488
+End			10759432
+Sampling10759948
+Wireless Data		10767940
+pid loop		10768476
+ESC Bitbanging		10769460
+End			10779432
+Sampling10779956
+Wireless Data		10787912
+pid loop		10788444
+ESC Bitbanging		10789424
+End			10799432
+Sampling10799948
+Wireless Data		10807876
+pid loop		10808412
+ESC Bitbanging		10809396
+End			10819432
+Sampling10819956
+Wireless Data		10827820
+pid loop		10828352
+ESC Bitbanging		10829336
+End			10839448
+Sampling10839964
+Wireless Data		10847832
+pid loop		10848368
+ESC Bitbanging		10849352
+End			10859448
+Sampling10859972
+Wireless Data		10867764
+pid loop		10868296
+ESC Bitbanging		10869280
+End			10879444
+Sampling10879964
+Wireless Data		10887768
+pid loop		10888304
+ESC Bitbanging		10889288
+End			10899452
+Sampling10899972
+Wireless Data		10907704
+pid loop		10908232
+ESC Bitbanging		10909216
+End			10919456
+Sampling10919976
+Wireless Data		10927664
+pid loop		10928200
+ESC Bitbanging		10929188
+End			10939468
+Sampling10939984
+Wireless Data		10947644
+pid loop		10948172
+ESC Bitbanging		10949156
+End			10959464
+Sampling10959988
+Wireless Data		10967608
+pid loop		10968144
+ESC Bitbanging		10969132
+End			10979472
+Sampling10979988
+Wireless Data		10987552
+pid loop		10988080
+ESC Bitbanging		10989068
+End			10999472
+Sampling10999996
+Wireless Data		11007528
+pid loop		11008068
+ESC Bitbanging		11009052
+End			11019476
+Sampling11020000
+Wireless Data		11027508
+pid loop		11028036
+ESC Bitbanging		11029028
+End			11039488
+Sampling11040016
+Wireless Data		11047476
+pid loop		11048012
+ESC Bitbanging		11049000
+End			11059488
+Sampling11060004
+Wireless Data		11067432
+pid loop		11067964
+ESC Bitbanging		11068952
+End			11079488
+Sampling11080012
+Wireless Data		11087424
+pid loop		11087960
+ESC Bitbanging		11088948
+End			11099492
+Sampling11100008
+Wireless Data		11107392
+pid loop		11107924
+ESC Bitbanging		11108908
+End			11119492
+Sampling11120020
+Wireless Data		11127340
+pid loop		11127880
+ESC Bitbanging		11128864
+End			11139496
+Sampling11140016
+Wireless Data		11147280
+pid loop		11147812
+ESC Bitbanging		11148804
+End			11159504
+Sampling11160028
+Wireless Data		11167268
+pid loop		11167804
+ESC Bitbanging		11168792
+End			11179504
+Sampling11180024
+Wireless Data		11187236
+pid loop		11187768
+ESC Bitbanging		11188756
+End			11199516
+Sampling11200032
+Wireless Data		11207192
+pid loop		11207728
+ESC Bitbanging		11208716
+End			11219512
+Sampling11220036
+Wireless Data		11227164
+pid loop		11227692
+ESC Bitbanging		11228680
+End			11239516
+Sampling11240032
+Wireless Data		11247124
+pid loop		11247660
+ESC Bitbanging		11248648
+End			11259524
+Sampling11260048
+Wireless Data		11267132
+pid loop		11267660
+ESC Bitbanging		11268648
+End			11279524
+Sampling11280040
+Wireless Data		11287084
+pid loop		11287620
+
+-----------------------------------------------
+Date: 07-Mar-16 - 3:00:11 AM
+End log file
