@@ -91,7 +91,7 @@ void setup() {
 #endif
 delay(9000);
 	Serial.begin(57600);
-Serial.println("GET READY");
+Serial.println(F("GET READY"));
 	/////////////////////////////////////////////////////
 
 
@@ -106,10 +106,10 @@ Serial.println("GET READY");
 
 	///////////MPU STUFF////////////////////7
 	mpu.initialize();
- Serial.println("Initializing MPU");
+ Serial.println(F("Initializing MPU"));
 	if (!mpu.testConnection())
 	exit(0);
-  Serial.println("MPU Connection Succesful");
+  Serial.println(F("MPU Connection Succesful"));
 	devStatus = mpu.dmpInitialize();
 	if (devStatus == 0)
 	{
@@ -172,12 +172,13 @@ Serial.println("GET READY");
 ///////////////////////////////////////FEEDBACK LOOP @50Hz//////////////////////////////////////////////////////////
 void loop()
 {
-Serial.print("Sampling time\t\t");  
+  start=micros();
+Serial.print(F("Sampling time\t\t"));  
 Serial.println(micros(),DEC);
-Serial.print("begin\t\t\t");
+Serial.print(F("begin\t\t\t"));
 Serial.println(micros(),DEC);
   
-Serial.print("dmp data\t\t");  
+Serial.print(F("dmp data\t\t"));  
 Serial.println(micros(),DEC);
 
 
@@ -199,7 +200,7 @@ Serial.println(micros(),DEC);
 		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity); 
 	}
 	///////////////////////////////////////////////////////////////////
-Serial.print("Wireless Data\t\t");
+Serial.print(F("Wireless Data\t\t"));
 Serial.println(micros(),DEC);
 	/////////////////////////Recieve Wireless Data//////////////////////9
 pid_roll_setpoint=0;
@@ -286,7 +287,7 @@ if (Serial.available())
 	
 
 
-Serial.print("pid loop\t\t");
+Serial.print(F("pid loop\t\t"));
 Serial.println(micros(),DEC);
 	//////////////////////CALL PID/////////////////////////////////////11
 	pid();
@@ -294,7 +295,7 @@ Serial.println(micros(),DEC);
 
 
 
-Serial.print("ESC Bitbanging\t\t");
+Serial.print(F("ESC Bitbanging\t\t"));
 Serial.println(micros(),DEC);
 	//////////////////////ESC BITBANGING//////////////////////////12
 	//7=br
@@ -313,7 +314,6 @@ Serial.println(micros(),DEC);
   if(valuefr<600)valuefr=580;if(valuefr>1200)valuefr=1200;
   valuefl=((    +   pid_output_pitch  +   pid_output_roll) ) +value;
 	if(valuefl<580)valuefl=580;if(valuefl>1200)valuefl=1200;
-	start = micros();
 	PORTD |= B11011000;
 	while ((micros() - start) < 2500)
 	{
@@ -324,7 +324,7 @@ Serial.println(micros(),DEC);
 	}
 	while (micros() - start < 20000);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Serial.print("End\t\t\t");
+Serial.print(F("End\t\t\t"));
 Serial.println(micros(),DEC);
 }
 
