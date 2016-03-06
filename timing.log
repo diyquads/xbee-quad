@@ -1,1590 +1,473 @@
 Terminal log file
-Date: 06-Mar-16 - 8:32:53 PM
+Date: 07-Mar-16 - 2:59:50 AM
 -----------------------------------------------
 GET READY
 Initializing MPU
 MPU Connection Succesful
-Sampling time		9452608
-begin			9453072
-dmp data		9453560
-Wireless Data		9454648
-pid loop		9457424
-ESC Bitbanging		9461672
-End			9483340
-Sampling time		9483872
-begin			9484348
-dmp data		9484824
-Wireless Data		9489280
-pid loop		9490788
-ESC Bitbanging		9495040
-End			9516712
-Sampling time		9517252
-begin			9517720
-dmp data		9518212
-Wireless Data		9522684
-pid loop		9524160
-ESC Bitbanging		9528408
-End			9550076
-Sampling time		9550608
-begin			9551080
-dmp data		9551568
-Wireless Data		9556060
-pid loop		9557524
-ESC Bitbanging		9561772
-End			9583440
-Sampling time		9583980
-begin			9584448
-dmp data		9584940
-Wireless Data		9589412
-pid loop		9590888
-ESC Bitbanging		9595140
-End			9616804
-Sampling time		9617336
-begin			9617808
-dmp data		9618284
-Wireless Data		9622748
-pid loop		9624252
-ESC Bitbanging		9628504
-End			9650172
-Sampling time		9650712
-begin			9651180
-dmp data		9651672
-Wireless Data		9656152
-pid loop		9657620
-ESC Bitbanging		9661872
-End			9683540
-Sampling time		9684080
-begin			9684544
-dmp data		9685036
-Wireless Data		9689516
-pid loop		9690988
-ESC Bitbanging		9695244
-End			9716908
-Sampling time		9717440
-begin			9717916
-dmp data		9718400
-Wireless Data		9722892
-pid loop		9724356
-ESC Bitbanging		9728608
-End			9750272
-Sampling time		9750812
-begin			9751280
-dmp data		9751768
-Wireless Data		9756248
-pid loop		9757720
-ESC Bitbanging		9761972
-End			9783640
-Sampling time		9784172
-begin			9784648
-dmp data		9785124
-Wireless Data		9789620
-pid loop		9791088
-ESC Bitbanging		9795340
-End			9817008
-Sampling time		9817548
-begin			9818016
-dmp data		9818508
-Wireless Data		9822984
-pid loop		9824456
-ESC Bitbanging		9828708
-End			9850376
-Sampling time		9850916
-begin			9851380
-dmp data		9851856
-Wireless Data		9856348
-pid loop		9857824
-ESC Bitbanging		9862076
-End			9883744
-Sampling time		9884276
-begin			9884748
-dmp data		9885224
-Wireless Data		9889676
-pid loop		9891192
-ESC Bitbanging		9895440
-End			9917120
-Sampling time		9917656
-begin			9918124
-dmp data		9918616
-Wireless Data		9923088
-pid loop		9924564
-ESC Bitbanging		9928816
-End			9950484
-Sampling time		9951016
-begin			9951492
-dmp data		9951976
-Wireless Data		9956468
-pid loop		9957932
-ESC Bitbanging		9962184
-End			9983852
-Sampling time		9984392
-begin			9984860
-dmp data		9985348
-Wireless Data		9989836
-pid loop		9991300
-ESC Bitbanging		9995552
-End			10017216
-Sampling time		10017800
-begin			10018316
-dmp data		10018852
-Wireless Data		10023664
-pid loop		10025516
-ESC Bitbanging		10029936
-End			10051772
-Sampling time		10052352
-begin			10052872
-dmp data		10053404
-Wireless Data		10058216
-pid loop		10060072
-ESC Bitbanging		10064492
-End			10086328
-Sampling time		10086916
-begin			10087436
-dmp data		10087964
-Wireless Data		10092776
-pid loop		10094628
-ESC Bitbanging		10099048
-End			10120896
-Sampling time		10121480
-begin			10121992
-dmp data		10122532
-Wireless Data		10127336
-pid loop		10129192
-ESC Bitbanging		10133612
-End			10155448
-Sampling time		10156028
-begin			10156548
-dmp data		10157088
-Wireless Data		10161888
-pid loop		10163748
-ESC Bitbanging		10168168
-End			10190008
-Sampling time		10190584
-begin			10191104
-dmp data		10191640
-Wireless Data		10196444
-pid loop		10198304
-ESC Bitbanging		10202724
-End			10224564
-Sampling time		10225148
-begin			10225676
-dmp data		10226208
-Wireless Data		10231000
-pid loop		10232860
-ESC Bitbanging		10237280
-End			10259128
-Sampling time		10259712
-begin			10260224
-dmp data		10260760
-Wireless Data		10265572
-pid loop		10267424
-ESC Bitbanging		10271844
-End			10293680
-Sampling time		10294256
-begin			10294776
-dmp data		10295312
-Wireless Data		10300116
-pid loop		10301976
-ESC Bitbanging		10306396
-End			10328240
-Sampling time		10328816
-begin			10329336
-dmp data		10329864
-Wireless Data		10334672
-pid loop		10336536
-ESC Bitbanging		10340956
-End			10362796
-Sampling time		10363380
-begin			10363896
-dmp data		10364432
-Wireless Data		10369240
-pid loop		10371096
-ESC Bitbanging		10375516
-End			10397360
-Sampling time		10397944
-begin			10398460
-dmp data		10398996
-Wireless Data		10403800
-pid loop		10405660
-ESC Bitbanging		10410080
-End			10431920
-Sampling time		10432496
-begin			10433016
-dmp data		10433552
-Wireless Data		10438356
-pid loop		10440216
-ESC Bitbanging		10444636
-End			10466472
-Sampling time		10467052
-begin			10467572
-dmp data		10468100
-Wireless Data		10472916
-pid loop		10474768
-ESC Bitbanging		10479188
-End			10501032
-Sampling time		10501612
-begin			10502124
-dmp data		10502660
-Wireless Data		10507468
-pid loop		10509332
-ESC Bitbanging		10513748
-End			10535596
-Sampling time		10536180
-begin			10536692
-dmp data		10537228
-Wireless Data		10542036
-pid loop		10543892
-ESC Bitbanging		10548312
-End			10570148
-Sampling time		10570724
-begin			10571244
-dmp data		10571772
-Wireless Data		10576584
-pid loop		10578448
-ESC Bitbanging		10582868
-End			10604704
-Sampling time		10605284
-begin			10605804
-dmp data		10606332
-FIFO overflow!
-Wireless Data		10612324
-pid loop		10615724
-ESC Bitbanging		10620144
-End			10641984
-Sampling time		10642568
-begin			10643080
-dmp data		10643616
-Wireless Data		10648424
-pid loop		10650280
-ESC Bitbanging		10654700
-End			10676536
-Sampling time		10677112
-begin			10677632
-dmp data		10678164
-Wireless Data		10682972
-pid loop		10684836
-ESC Bitbanging		10689256
-End			10711100
-Sampling time		10711680
-begin			10712196
-dmp data		10712728
-Wireless Data		10717548
-pid loop		10719400
-ESC Bitbanging		10723820
-End			10745656
-Sampling time		10746240
-begin			10746752
-dmp data		10747292
-Wireless Data		10752104
-pid loop		10753952
-ESC Bitbanging		10758372
-End			10780216
-Sampling time		10780796
-begin			10781312
-dmp data		10781848
-Wireless Data		10786656
-pid loop		10788512
-ESC Bitbanging		10792932
-End			10814772
-Sampling time		10815348
-begin			10815868
-dmp data		10816400
-Wireless Data		10821208
-pid loop		10823072
-ESC Bitbanging		10827492
-End			10849332
-Sampling time		10849912
-begin			10850432
-dmp data		10850964
-Wireless Data		10855772
-pid loop		10857632
-ESC Bitbanging		10862052
-End			10883892
-Sampling time		10884480
-begin			10884992
-dmp data		10885528
-Wireless Data		10890332
-pid loop		10892188
-ESC Bitbanging		10896608
-End			10918444
-Sampling time		10919024
-begin			10919540
-dmp data		10920076
-Wireless Data		10924892
-pid loop		10926740
-ESC Bitbanging		10931160
-End			10953000
-Sampling time		10953580
-begin			10954100
-dmp data		10954632
-Wireless Data		10959440
-pid loop		10961300
-ESC Bitbanging		10965720
-End			10987564
-Sampling time		10988140
-begin			10988660
-dmp data		10989192
-Wireless Data		10994000
-pid loop		10995852
-ESC Bitbanging		11000276
-End			11022112
-Sampling time		11022696
-begin			11023208
-dmp data		11023748
-Wireless Data		11028556
-pid loop		11030408
-ESC Bitbanging		11034828
-End			11056668
-Sampling time		11057252
-begin			11057768
-dmp data		11058304
-Wireless Data		11063116
-pid loop		11064968
-ESC Bitbanging		11069388
-End			11091228
-Sampling time		11091804
-begin			11092324
-dmp data		11092856
-Wireless Data		11097668
-pid loop		11099524
-ESC Bitbanging		11103944
-End			11125788
-Sampling time		11126364
-begin			11126884
-dmp data		11127416
-Wireless Data		11132232
-pid loop		11134080
-ESC Bitbanging		11138500
-End			11160336
-Sampling time		11160920
-begin			11161436
-dmp data		11161972
-Wireless Data		11166792
-pid loop		11168632
-ESC Bitbanging		11173052
-End			11194892
-Sampling time		11195476
-begin			11195992
-dmp data		11196532
-Wireless Data		11201348
-pid loop		11203192
-ESC Bitbanging		11207612
-End			11229448
-Sampling time		11230024
-begin			11230544
-dmp data		11231076
-Wireless Data		11235896
-pid loop		11237744
-ESC Bitbanging		11242164
-End			11264012
-Sampling time		11264588
-begin			11265104
-dmp data		11265636
-Wireless Data		11270452
-pid loop		11272304
-ESC Bitbanging		11276724
-End			11298564
-Sampling time		11299148
-begin			11299660
-dmp data		11300196
-Wireless Data		11305016
-pid loop		11306860
-ESC Bitbanging		11311280
-End			11333116
-Sampling time		11333700
-begin			11334216
-dmp data		11334756
-Wireless Data		11339568
-pid loop		11341416
-ESC Bitbanging		11345836
-End			11367672
-Sampling time		11368248
-begin			11368768
-dmp data		11369300
-Wireless Data		11374116
-pid loop		11375968
-ESC Bitbanging		11380388
-End			11402228
-Sampling time		11402812
-begin			11403340
-dmp data		11403872
-Wireless Data		11408676
-pid loop		11410528
-ESC Bitbanging		11414948
-End			11436784
-Sampling time		11437368
-begin			11437884
-dmp data		11438424
-Wireless Data		11443240
-pid loop		11445080
-ESC Bitbanging		11449500
-End			11471340
-Sampling time		11471924
-begin			11472440
-dmp data		11472976
-Wireless Data		11477796
-pid loop		11479640
-ESC Bitbanging		11484060
-End			11505896
-Sampling time		11506476
-begin			11506996
-dmp data		11507528
-Wireless Data		11512340
-pid loop		11514192
-ESC Bitbanging		11518612
-End			11540452
-Sampling time		11541036
-begin			11541556
-dmp data		11542088
-Wireless Data		11546900
-pid loop		11548752
-ESC Bitbanging		11553172
-End			11575008
-Sampling time		11575592
-begin			11576104
-dmp data		11576644
-Wireless Data		11581460
-pid loop		11583304
-ESC Bitbanging		11587724
-End			11609564
-Sampling time		11610152
-begin			11610664
-dmp data		11611204
-Wireless Data		11616024
-pid loop		11617864
-ESC Bitbanging		11622284
-End			11644120
-Sampling time		11644696
-begin			11645220
-dmp data		11645748
-Wireless Data		11650568
-pid loop		11652416
-ESC Bitbanging		11656836
-End			11678676
-Sampling time		11679264
-begin			11679784
-dmp data		11680316
-Wireless Data		11685136
-pid loop		11686976
-ESC Bitbanging		11691396
-End			11713232
-Sampling time		11713816
-begin			11714332
-dmp data		11714868
-Wireless Data		11719692
-pid loop		11721528
-ESC Bitbanging		11725952
-End			11747788
-Sampling time		11748372
-begin			11748888
-dmp data		11749424
-FIFO overflow!
-Wireless Data		11755404
-pid loop		11758804
-ESC Bitbanging		11763224
-End			11785064
-Sampling time		11785648
-begin			11786160
-dmp data		11786700
-Wireless Data		11791516
-pid loop		11793360
-ESC Bitbanging		11797780
-End			11819624
-Sampling time		11820208
-begin			11820720
-dmp data		11821260
-Wireless Data		11826076
-pid loop		11827920
-ESC Bitbanging		11832340
-End			11854180
-Sampling time		11854756
-begin			11855280
-dmp data		11855808
-Wireless Data		11860632
-pid loop		11862476
-ESC Bitbanging		11866896
-End			11888736
-Sampling time		11889312
-begin			11889832
-dmp data		11890364
-Wireless Data		11895184
-pid loop		11897036
-ESC Bitbanging		11901456
-End			11923292
-Sampling time		11923876
-begin			11924388
-dmp data		11924928
-Wireless Data		11929748
-pid loop		11931588
-ESC Bitbanging		11936008
-End			11957848
-Sampling time		11958436
-begin			11958948
-dmp data		11959488
-Wireless Data		11964308
-pid loop		11966148
-ESC Bitbanging		11970572
-End			11992404
-Sampling time		11992980
-begin			11993504
-dmp data		11994036
-Wireless Data		11998856
-pid loop		12000700
-ESC Bitbanging		12005120
-End			12026960
-Sampling time		12027540
-begin			12028060
-dmp data		12028592
-Wireless Data		12033416
-pid loop		12035260
-ESC Bitbanging		12039680
-End			12061516
-Sampling time		12062104
-begin			12062624
-dmp data		12063160
-Wireless Data		12067968
-pid loop		12069816
-ESC Bitbanging		12074236
-End			12096076
-Sampling time		12096660
-begin			12097172
-dmp data		12097708
-Wireless Data		12102528
-pid loop		12104372
-ESC Bitbanging		12108792
-End			12130632
-Sampling time		12131212
-begin			12131732
-dmp data		12132264
-Wireless Data		12137084
-pid loop		12138932
-ESC Bitbanging		12143352
-End			12165188
-Sampling time		12165768
-begin			12166288
-dmp data		12166816
-Wireless Data		12171636
-pid loop		12173488
-ESC Bitbanging		12177908
-End			12199744
-Sampling time		12200332
-begin			12200844
-dmp data		12201384
-Wireless Data		12206196
-pid loop		12208044
-ESC Bitbanging		12212464
-End			12234300
-Sampling time		12234884
-begin			12235400
-dmp data		12235936
-Wireless Data		12240752
-pid loop		12242596
-ESC Bitbanging		12247016
-End			12268856
-Sampling time		12269436
-begin			12269956
-dmp data		12270488
-Wireless Data		12275304
-pid loop		12277156
-ESC Bitbanging		12281576
-End			12303416
-Sampling time		12303996
-begin			12304516
-dmp data		12305048
-Wireless Data		12309868
-pid loop		12311716
-ESC Bitbanging		12316136
-End			12337972
-Sampling time		12338556
-begin			12339072
-dmp data		12339608
-Wireless Data		12344428
-pid loop		12346272
-ESC Bitbanging		12350692
-End			12372528
-Sampling time		12373112
-begin			12373624
-dmp data		12374164
-Wireless Data		12378976
-pid loop		12380824
-ESC Bitbanging		12385244
-End			12407084
-Sampling time		12407664
-begin			12408184
-dmp data		12408716
-Wireless Data		12413528
-pid loop		12415380
-ESC Bitbanging		12419800
-End			12441652
-Sampling time		12442232
-begin			12442752
-dmp data		12443284
-Wireless Data		12448100
-pid loop		12449952
-ESC Bitbanging		12454372
-End			12476208
-Sampling time		12476792
-begin			12477308
-dmp data		12477848
-Wireless Data		12482660
-pid loop		12484504
-ESC Bitbanging		12488924
-End			12510768
-Sampling time		12511352
-begin			12511868
-dmp data		12512404
-Wireless Data		12517216
-pid loop		12519064
-ESC Bitbanging		12523484
-End			12545324
-Sampling time		12545900
-begin			12546420
-dmp data		12546952
-Wireless Data		12551772
-pid loop		12553624
-ESC Bitbanging		12558044
-End			12579888
-Sampling time		12580464
-begin			12580984
-dmp data		12581520
-Wireless Data		12586332
-pid loop		12588180
-ESC Bitbanging		12592600
-End			12614436
-Sampling time		12615020
-begin			12615536
-dmp data		12616076
-Wireless Data		12620884
-pid loop		12622732
-ESC Bitbanging		12627152
-End			12648992
-Sampling time		12649576
-begin			12650092
-dmp data		12650628
-Wireless Data		12655440
-pid loop		12657292
-ESC Bitbanging		12661712
-End			12683552
-Sampling time		12684128
-begin			12684652
-dmp data		12685184
-Wireless Data		12689996
-pid loop		12691848
-ESC Bitbanging		12696268
-End			12718116
-Sampling time		12718692
-begin			12719216
-dmp data		12719748
-Wireless Data		12724556
-pid loop		12726408
-ESC Bitbanging		12730828
-End			12752668
-Sampling time		12753252
-begin			12753768
-dmp data		12754304
-Wireless Data		12759120
-pid loop		12760964
-ESC Bitbanging		12765384
-End			12787220
-Sampling time		12787804
-begin			12788320
-dmp data		12788860
-Wireless Data		12793672
-pid loop		12795520
-ESC Bitbanging		12799940
-End			12821780
-Sampling time		12822356
-begin			12822876
-dmp data		12823404
-Wireless Data		12828224
-pid loop		12830076
-ESC Bitbanging		12834496
-End			12856344
-Sampling time		12856920
-begin			12857440
-dmp data		12857972
-Wireless Data		12862788
-pid loop		12864636
-ESC Bitbanging		12869056
-End			12890892
-Sampling time		12891476
-begin			12891988
-dmp data		12892528
-FIFO overflow!
-Wireless Data		12898508
-pid loop		12901912
-ESC Bitbanging		12906328
-End			12928172
-Sampling time		12928748
-begin			12929264
-dmp data		12929796
-Wireless Data		12934616
-pid loop		12936468
-ESC Bitbanging		12940888
-End			12962728
-Sampling time		12963312
-begin			12963828
-dmp data		12964364
-Wireless Data		12969176
-pid loop		12971028
-ESC Bitbanging		12975448
-End			12997296
-Sampling time		12997880
-begin			12998392
-dmp data		12998932
-Wireless Data		13003744
-pid loop		13005592
-ESC Bitbanging		13010012
-End			13031848
-Sampling time		13032428
-begin			13032948
-dmp data		13033484
-Wireless Data		13038292
-pid loop		13040148
-ESC Bitbanging		13044568
-End			13066408
-Sampling time		13066984
-begin			13067504
-dmp data		13068036
-Wireless Data		13072856
-pid loop		13074704
-ESC Bitbanging		13079124
-End			13100960
-Sampling time		13101544
-begin			13102060
-dmp data		13102600
-Wireless Data		13107408
-pid loop		13109264
-ESC Bitbanging		13113680
-End			13135520
-Sampling time		13136104
-begin			13136616
-dmp data		13137152
-Wireless Data		13141968
-pid loop		13143816
-ESC Bitbanging		13148236
-End			13170080
-Sampling time		13170656
-begin			13171176
-dmp data		13171704
-Wireless Data		13176524
-pid loop		13178376
-ESC Bitbanging		13182796
-End			13204636
-Sampling time		13205212
-begin			13205732
-dmp data		13206264
-Wireless Data		13211080
-pid loop		13212936
-ESC Bitbanging		13217356
-End			13239192
-Sampling time		13239776
-begin			13240296
-dmp data		13240832
-Wireless Data		13245636
-pid loop		13247496
-ESC Bitbanging		13251912
-End			13273752
-Sampling time		13274336
-begin			13274848
-dmp data		13275384
-Wireless Data		13280200
-pid loop		13282052
-ESC Bitbanging		13286472
-End			13308312
-Sampling time		13308888
-begin			13309408
-dmp data		13309940
-Wireless Data		13314764
-pid loop		13316608
-ESC Bitbanging		13321028
-End			13342868
-Sampling time		13343444
-begin			13343964
-dmp data		13344496
-Wireless Data		13349316
-pid loop		13351164
-ESC Bitbanging		13355584
-End			13377424
-Sampling time		13378008
-begin			13378520
-dmp data		13379056
-Wireless Data		13383872
-pid loop		13385724
-ESC Bitbanging		13390144
-End			13411988
-Sampling time		13412572
-begin			13413088
-dmp data		13413624
-Wireless Data		13418440
-pid loop		13420288
-ESC Bitbanging		13424708
-End			13446548
-Sampling time		13447124
-begin			13447640
-dmp data		13448172
-Wireless Data		13453000
-pid loop		13454844
-ESC Bitbanging		13459264
-End			13481104
-Sampling time		13481680
-begin			13482200
-dmp data		13482728
-Wireless Data		13487548
-pid loop		13489400
-ESC Bitbanging		13493820
-End			13515660
-Sampling time		13516248
-begin			13516760
-dmp data		13517300
-Wireless Data		13522112
-pid loop		13523960
-ESC Bitbanging		13528380
-End			13550228
-Sampling time		13550812
-begin			13551324
-dmp data		13551864
-Wireless Data		13556684
-pid loop		13558524
-ESC Bitbanging		13562944
-End			13584780
-Sampling time		13585360
-begin			13585876
-dmp data		13586408
-Wireless Data		13591236
-pid loop		13593080
-ESC Bitbanging		13597500
-End			13619336
-Sampling time		13619916
-begin			13620436
-dmp data		13620968
-Wireless Data		13625784
-pid loop		13627632
-ESC Bitbanging		13632052
-End			13653892
-Sampling time		13654476
-begin			13654992
-dmp data		13655528
-Wireless Data		13660348
-pid loop		13662192
-ESC Bitbanging		13666612
-End			13688460
-Sampling time		13689040
-begin			13689556
-dmp data		13690092
-Wireless Data		13694912
-pid loop		13696756
-ESC Bitbanging		13701176
-End			13723012
-Sampling time		13723592
-begin			13724112
-dmp data		13724640
-Wireless Data		13729464
-pid loop		13731312
-ESC Bitbanging		13735728
-End			13757568
-Sampling time		13758148
-begin			13758668
-dmp data		13759200
-Wireless Data		13764020
-pid loop		13765864
-ESC Bitbanging		13770284
-End			13792124
-Sampling time		13792708
-begin			13793224
-dmp data		13793760
-Wireless Data		13798576
-pid loop		13800424
-ESC Bitbanging		13804844
-End			13826688
-Sampling time		13827268
-begin			13827784
-dmp data		13828320
-Wireless Data		13833136
-pid loop		13834984
-ESC Bitbanging		13839404
-End			13861244
-Sampling time		13861824
-begin			13862344
-dmp data		13862876
-Wireless Data		13867692
-pid loop		13869544
-ESC Bitbanging		13873964
-End			13895800
-Sampling time		13896380
-begin			13896900
-dmp data		13897432
-Wireless Data		13902268
-pid loop		13904100
-ESC Bitbanging		13908520
-End			13930356
-Sampling time		13930940
-begin			13931452
-dmp data		13931988
-Wireless Data		13936792
-pid loop		13938652
-ESC Bitbanging		13943072
-End			13964916
-Sampling time		13965500
-begin			13966012
-dmp data		13966552
-FIFO overflow!
-Wireless Data		13972536
-pid loop		13975936
-ESC Bitbanging		13980352
-End			14002200
-Sampling time		14002780
-begin			14003300
-dmp data		14003832
-Wireless Data		14008640
-pid loop		14010492
-ESC Bitbanging		14014912
-End			14036752
-Sampling time		14037336
-begin			14037852
-dmp data		14038392
-Wireless Data		14043204
-pid loop		14045052
-ESC Bitbanging		14049472
-End			14071312
-Sampling time		14071896
-begin			14072412
-dmp data		14072948
-Wireless Data		14077760
-pid loop		14079608
-ESC Bitbanging		14084028
-End			14105864
-Sampling time		14106440
-begin			14106960
-dmp data		14107492
-Wireless Data		14112308
-pid loop		14114164
-ESC Bitbanging		14118584
-End			14140428
-Sampling time		14141004
-begin			14141524
-dmp data		14142056
-Wireless Data		14146864
-pid loop		14148720
-ESC Bitbanging		14153140
-End			14174976
-Sampling time		14175560
-begin			14176072
-dmp data		14176612
-Wireless Data		14181428
-pid loop		14183272
-ESC Bitbanging		14187692
-End			14209532
-Sampling time		14210116
-begin			14210632
-dmp data		14211168
-Wireless Data		14215980
-pid loop		14217832
-ESC Bitbanging		14222252
-End			14244088
-Sampling time		14244664
-begin			14245184
-dmp data		14245716
-Wireless Data		14250532
-pid loop		14252384
-ESC Bitbanging		14256804
-End			14278652
-Sampling time		14279236
-begin			14279756
-dmp data		14280288
-Wireless Data		14285092
-pid loop		14286948
-ESC Bitbanging		14291368
-End			14313204
-Sampling time		14313792
-begin			14314304
-dmp data		14314844
-Wireless Data		14319660
-pid loop		14321504
-ESC Bitbanging		14325924
-End			14347760
-Sampling time		14348344
-begin			14348856
-dmp data		14349392
-Wireless Data		14354208
-pid loop		14356056
-ESC Bitbanging		14360476
-End			14382316
-Sampling time		14382896
-begin			14383416
-dmp data		14383948
-Wireless Data		14388760
-pid loop		14390616
-ESC Bitbanging		14395036
-End			14416872
-Sampling time		14417456
-begin			14417976
-dmp data		14418512
-Wireless Data		14423316
-pid loop		14425168
-ESC Bitbanging		14429588
-End			14451428
-Sampling time		14452012
-begin			14452524
-dmp data		14453064
-Wireless Data		14457884
-pid loop		14459728
-ESC Bitbanging		14464148
-End			14485984
-Sampling time		14486568
-begin			14487080
-dmp data		14487616
-Wireless Data		14492432
-pid loop		14494280
-ESC Bitbanging		14498700
-End			14520540
-Sampling time		14521120
-begin			14521640
-dmp data		14522168
-Wireless Data		14526988
-pid loop		14528840
-ESC Bitbanging		14533260
-End			14555096
-Sampling time		14555680
-begin			14556200
-dmp data		14556732
-Wireless Data		14561544
-pid loop		14563396
-ESC Bitbanging		14567816
-End			14589652
-Sampling time		14590236
-begin			14590752
-dmp data		14591288
-Wireless Data		14596104
-pid loop		14597948
-ESC Bitbanging		14602368
-End			14624208
-Sampling time		14624792
-begin			14625308
-dmp data		14625844
-Wireless Data		14630660
-pid loop		14632508
-ESC Bitbanging		14636928
-End			14658764
-Sampling time		14659340
-begin			14659860
-dmp data		14660392
-Wireless Data		14665212
-pid loop		14667060
-ESC Bitbanging		14671480
-End			14693320
-Sampling time		14693908
-begin			14694428
-dmp data		14694960
-Wireless Data		14699772
-pid loop		14701620
-ESC Bitbanging		14706040
-End			14727876
-Sampling time		14728460
-begin			14728976
-dmp data		14729512
-Wireless Data		14734324
-pid loop		14736172
-ESC Bitbanging		14740592
-End			14762432
-Sampling time		14763016
-begin			14763532
-dmp data		14764068
-Wireless Data		14768884
-pid loop		14770732
-ESC Bitbanging		14775152
-End			14796988
-Sampling time		14797564
-begin			14798092
-dmp data		14798620
-Wireless Data		14803432
-pid loop		14805288
-ESC Bitbanging		14809708
-End			14831544
-Sampling time		14832132
-begin			14832652
-dmp data		14833180
-Wireless Data		14837996
-pid loop		14839844
-ESC Bitbanging		14844264
-End			14866112
-Sampling time		14866696
-begin			14867208
-dmp data		14867744
-Wireless Data		14872552
-pid loop		14874408
-ESC Bitbanging		14878828
-End			14900664
-Sampling time		14901240
-begin			14901760
-dmp data		14902300
-Wireless Data		14907112
-pid loop		14908964
-ESC Bitbanging		14913380
-End			14935224
-Sampling time		14935800
-begin			14936320
-dmp data		14936852
-Wireless Data		14941664
-pid loop		14943520
-ESC Bitbanging		14947940
-End			14969776
-Sampling time		14970360
-begin			14970876
-dmp data		14971416
-Wireless Data		14976220
-pid loop		14978076
-ESC Bitbanging		14982496
-End			15004340
-Sampling time		15004928
-begin			15005440
-dmp data		15005980
-Wireless Data		15010788
-pid loop		15012640
-ESC Bitbanging		15017060
-End			15038896
-Sampling time		15039476
-begin			15039996
-dmp data		15040540
-Wireless Data		15045340
-pid loop		15047196
-ESC Bitbanging		15051616
-End			15073456
-Sampling time		15074032
-begin			15074552
-dmp data		15075084
-Wireless Data		15079900
-pid loop		15081752
-ESC Bitbanging		15086172
-End			15108012
-Sampling time		15108596
-begin			15109108
-dmp data		15109648
-FIFO overflow!
-Wireless Data		15115628
-pid loop		15119028
-ESC Bitbanging		15123448
-End			15145288
-Sampling time		15145868
-begin			15146388
-dmp data		15146920
-Wireless Data		15151740
-pid loop		15153588
-ESC Bitbanging		15158008
-End			15179844
-Sampling time		15180424
-begin			15180948
-dmp data		15181476
-Wireless Data		15186288
-pid loop		15188144
-ESC Bitbanging		15192564
-End			15214400
-Sampling time		15214984
-begin			15215500
-dmp data		15216040
-Wireless Data		15220856
-pid loop		15222700
-ESC Bitbanging		15227120
-End			15248956
-Sampling time		15249544
-begin			15250056
-dmp data		15250596
-Wireless Data		15255408
-pid loop		15257256
-ESC Bitbanging		15261676
-End			15283512
-Sampling time		15284092
-begin			15284612
-dmp data		15285144
-Wireless Data		15289956
-pid loop		15291812
-ESC Bitbanging		15296232
-End			15318072
-Sampling time		15318656
-begin			15319176
-dmp data		15319708
-Wireless Data		15324520
-pid loop		15326372
-ESC Bitbanging		15330792
-End			15352628
-Sampling time		15353216
-begin			15353732
-dmp data		15354272
-Wireless Data		15359080
-pid loop		15360928
-ESC Bitbanging		15365344
-End			15387188
-Sampling time		15387772
-begin			15388284
-dmp data		15388824
-Wireless Data		15393636
-pid loop		15395484
-ESC Bitbanging		15399904
-End			15421740
-Sampling time		15422320
-begin			15422840
-dmp data		15423372
-Wireless Data		15428188
-pid loop		15430040
-ESC Bitbanging		15434460
-End			15456304
-Sampling time		15456888
-begin			15457408
-dmp data		15457936
-Wireless Data		15462740
-pid loop		15464596
-ESC Bitbanging		15469012
-End			15490856
-Sampling time		15491440
-begin			15491952
-dmp data		15492492
-Wireless Data		15497308
-pid loop		15499152
-ESC Bitbanging		15503572
-End			15525408
-Sampling time		15525992
-begin			15526508
-dmp data		15527044
-Wireless Data		15531856
-pid loop		15533708
-ESC Bitbanging		15538128
-End			15559968
-Sampling time		15560548
-begin			15561068
-dmp data		15561600
-Wireless Data		15566412
-pid loop		15568264
-ESC Bitbanging		15572684
-End			15594532
-Sampling time		15595108
-begin			15595632
-dmp data		15596164
-Wireless Data		15600972
-pid loop		15602820
-ESC Bitbanging		15607244
-End			15629084
-Sampling time		15629668
-begin			15630180
-dmp data		15630720
-Wireless Data		15635536
-pid loop		15637380
-ESC Bitbanging		15641800
-End			15663636
-Sampling time		15664224
-begin			15664736
-dmp data		15665276
-Wireless Data		15670088
-pid loop		15671936
-ESC Bitbanging		15676356
-End			15698192
-Sampling time		15698768
-begin			15699292
-dmp data		15699820
-Wireless Data		15704636
-pid loop		15706488
-ESC Bitbanging		15710908
-End			15732756
-Sampling time		15733332
-begin			15733852
-dmp data		15734384
-Wireless Data		15739196
-pid loop		15741044
-ESC Bitbanging		15745464
-End			15767308
-Sampling time		15767892
-begin			15768408
-dmp data		15768944
-Wireless Data		15773760
-pid loop		15775604
-ESC Bitbanging		15780024
-End			15801864
-Sampling time		15802448
-begin			15802964
-dmp data		15803500
-Wireless Data		15808312
-pid loop		15810164
-ESC Bitbanging		15814584
-End			15836420
-Sampling time		15836996
-begin			15837520
-dmp data		15838052
-Wireless Data		15842864
-pid loop		15844716
-ESC Bitbanging		15849136
-End			15870984
-Sampling time		15871564
-begin			15872088
-dmp data		15872616
-Wireless Data		15877428
-pid loop		15879276
-ESC Bitbanging		15883696
-End			15905532
-Sampling time		15906116
-begin			15906632
-dmp data		15907168
-Wireless Data		15911984
-pid loop		15913828
-ESC Bitbanging		15918248
-End			15940088
-Sampling time		15940676
-begin			15941188
-dmp data		15941728
-Wireless Data		15946536
-pid loop		15948388
-ESC Bitbanging		15952808
-End			15974644
-Sampling time		15975220
-begin			15975748
-dmp data		15976280
-Wireless Data		15981088
-pid loop		15982940
-ESC Bitbanging		15987360
-End			16009200
-Sampling time		16009784
-begin			16010304
-dmp data		16010832
-Wireless Data		16015644
-pid loop		16017500
-ESC Bitbanging		16021920
-End			16043756
-Sampling time		16044340
-begin			16044852
-dmp data		16045388
-Wireless Data		16050208
-pid loop		16052052
-ESC Bitbanging		16056472
-End			16078312
-Sampling time		16078896
-begin			16079412
-dmp data		16079948
-Wireless Data		16084764
-pid loop		16086612
-ESC Bitbanging		16091032
-End			16112868
-Sampling time		16113444
-begin			16113964
-dmp data		16114496
-Wireless Data		16119312
-pid loop		16121168
-ESC Bitbanging		16125584
-End			16147424
-Sampling time		16148008
-begin			16148528
-dmp data		16149056
-Wireless Data		16153872
-pid loop		16155720
-ESC Bitbanging		16160140
-End			16181980
-Sampling time		16182564
-begin			16183080
-dmp data		16183616
-Wireless Data		16188436
-pid loop		16190280
-ESC Bitbanging		16194700
-End			16216536
-Sampling time		16217120
-begin			16217636
-dmp data		16218172
-FIFO overflow!
-Wireless Data		16224156
-pid loop		16227556
-ESC Bitbanging		16231976
-End			16253812
-Sampling time		16254396
-begin			16254912
-dmp data		16255456
-Wireless Data		16260264
-pid loop		16262112
-ESC Bitbanging		16266532
-End			16288376
-Sampling time		16288960
-begin			16289476
-dmp data		16290012
-Wireless Data		16294824
-pid loop		16296676
-ESC Bitbanging		16301096
-End			16322932
-Sampling time		16323508
-begin			16324028
-dmp data		16324560
-Wireless Data		16329372
-pid loop		16331228
-ESC Bitbanging		16335648
-End			16357488
-Sampling time		16358068
-begin			16358588
-dmp data		16359120
-Wireless Data		16363932
-pid loop		16365784
-ESC Bitbanging		16370204
-End			16392044
-Sampling time		16392628
-begin			16393140
-dmp data		16393676
-Wireless Data		16398492
-pid loop		16400344
-ESC Bitbanging		16404764
-End			16426608
-Sampling time		16427192
-begin			16427704
-dmp data		16428240
-Wireless Data		16433052
-pid loop		16434908
-ESC Bitbanging		16439328
-End			16461164
-Sampling time		16461740
-begin			16462260
-dmp data		16462788
-Wireless Data		16467608
-pid loop		16469460
-ESC Bitbanging		16473880
-End			16495720
-Sampling time		16496300
-begin			16496816
-dmp data		16497348
-Wireless Data		16502164
-pid loop		16504020
-ESC Bitbanging		16508440
-End			16530280
-Sampling time		16530864
-begin			16531376
-dmp data		16531912
-Wireless Data		16536728
-pid loop		16538576
-ESC Bitbanging		16542996
-End			16564840
-Sampling time		16565424
-begin			16565936
-dmp data		16566472
-Wireless Data		16571284
-pid loop		16573136
-ESC Bitbanging		16577556
-End			16599396
-Sampling time		16599976
-begin			16600496
-dmp data		16601024
-Wireless Data		16605844
-pid loop		16607696
-ESC Bitbanging		16612116
-End			16633952
-Sampling time		16634532
-begin			16635056
-dmp data		16635588
-Wireless Data		16640396
-pid loop		16642248
-ESC Bitbanging		16646668
-End			16668508
-Sampling time		16669092
-begin			16669608
-dmp data		16670144
-Wireless Data		16674964
-pid loop		16676808
-ESC Bitbanging		16681228
-End			16703064
-Sampling time		16703648
-begin			16704164
-dmp data		16704700
-Wireless Data		16709512
-pid loop		16711360
-ESC Bitbanging		16715788
-End			16737620
-Sampling time		16738200
-begin			16738716
-dmp data		16739248
-Wireless Data		16744068
-pid loop		16745920
-ESC Bitbanging		16750340
-End			16772176
-Sampling time		16772752
-begin			16773272
-dmp data		16773804
-Wireless Data		16778616
-pid loop		16780472
-ESC Bitbanging		16784892
-End			16806732
-Sampling time		16807316
-begin			16807828
-dmp data		16808364
-Wireless Data		16813184
-pid loop		16815032
-ESC Bitbanging		16819452
-End			16841288
-Sampling time		16841872
-begin			16842384
-dmp data		16842920
-Wireless Data		16847736
-pid loop		16849584
-ESC Bitbanging		16854004
-End			16875844
-Sampling time		16876420
-begin			16876940
-dmp data		16877472
-Wireless Data		16882288
-pid loop		16884144
-ESC Bitbanging		16888564
-End			16910400
-Sampling time		16910980
-begin			16911500
-dmp data		16912028
-Wireless Data		16916848
-pid loop		16918700
-ESC Bitbanging		16923120
-End			16944956
-Sampling time		16945540
-begin			16946056
-dmp data		16946592
-Wireless Data		16951400
-pid loop		16953256
-ESC Bitbanging		16957676
-End			16979512
-Sampling time		16980100
-begin			16980612
-dmp data		16981148
-Wireless Data		16985956
-pid loop		16987812
-ESC Bitbanging		16992232
-End			17014072
-Sampling time		17014652
-begin			17015172
-dmp data		17015704
-Wireless Data		17020508
-pid loop		17022364
-ESC Bitbanging		17026784
-End			17048632
-Sampling time		17049212
-begin			17049732
-dmp data		17050260
-Wireless Data		17055076
-pid loop		17056928
-ESC Bitbanging		17061348
-End			17083188
-Sampling time		17083772
-begin			17084284
-dmp data		17084824
-Wireless Data		17089632
-pid loop		17091484
-ESC Bitbanging		17095904
-End			17117740
-Sampling time		17118324
-begin			17118840
-dmp data		17119380
-Wireless Data		17124188
-pid loop		17126040
-ESC Bitbanging		17130460
-End			17152300
-Sampling time		17152876
-begin			17153396
-dmp data		17153932
-Wireless Data		17158748
-pid loop		17160596
-ESC Bitbanging		17165016
-End			17186860
-Sampling time		17187436
-begin			17187956
-dmp data		17188488
-Wireless Data		17193304
-pid loop		17195152
-ESC Bitbanging		17199572
+Sampling9453132
+Wireless Data		9454208
+pid loop		9454696
+ESC Bitbanging		9455504
+End			9459140
+Sampling9460396
+Wireless Data		9470260
+pid loop		9470736
+ESC Bitbanging		9471956
+End			9479148
+Sampling9479624
+Wireless Data		9490180
+pid loop		9490668
+ESC Bitbanging		9491608
+End			9499156
+Sampling9499628
+Wireless Data		9510092
+pid loop		9510576
+ESC Bitbanging		9511508
+End			9519172
+Sampling9519636
+Wireless Data		9530064
+pid loop		9530552
+ESC Bitbanging		9531488
+End			9539168
+Sampling9539648
+Wireless Data		9550028
+pid loop		9550512
+ESC Bitbanging		9551448
+End			9559168
+Sampling9559640
+Wireless Data		9569996
+pid loop		9570488
+ESC Bitbanging		9571420
+End			9579168
+Sampling9579648
+Wireless Data		9589944
+pid loop		9590428
+ESC Bitbanging		9591360
+End			9599184
+Sampling9599648
+Wireless Data		9609896
+pid loop		9610384
+ESC Bitbanging		9611320
+End			9619184
+Sampling9619664
+Wireless Data		9629872
+pid loop		9630356
+ESC Bitbanging		9631288
+End			9639180
+Sampling9639652
+Wireless Data		9649872
+pid loop		9650360
+ESC Bitbanging		9651296
+End			9659184
+Sampling9659664
+Wireless Data		9669796
+pid loop		9670280
+ESC Bitbanging		9671212
+End			9679192
+Sampling9679664
+Wireless Data		9689780
+pid loop		9690268
+ESC Bitbanging		9691200
+End			9699200
+Sampling9699672
+Wireless Data		9709732
+pid loop		9710216
+ESC Bitbanging		9711148
+End			9719200
+Sampling9719672
+Wireless Data		9729716
+pid loop		9730208
+ESC Bitbanging		9731144
+End			9739204
+Sampling9739680
+Wireless Data		9749656
+pid loop		9750140
+ESC Bitbanging		9751080
+End			9759208
+Sampling9759676
+Wireless Data		9769628
+pid loop		9770116
+ESC Bitbanging		9771056
+End			9779224
+Sampling9779684
+Wireless Data		9789604
+pid loop		9790088
+ESC Bitbanging		9791028
+End			9799220
+Sampling9799696
+Wireless Data		9809576
+pid loop		9810068
+ESC Bitbanging		9811004
+End			9819216
+Sampling9819684
+Wireless Data		9829508
+pid loop		9829996
+ESC Bitbanging		9830932
+End			9839216
+Sampling9839692
+Wireless Data		9849500
+pid loop		9849988
+ESC Bitbanging		9850928
+End			9859224
+Sampling9859692
+Wireless Data		9869456
+pid loop		9869940
+ESC Bitbanging		9870876
+End			9879236
+Sampling9879712
+Wireless Data		9889428
+pid loop		9889916
+ESC Bitbanging		9890856
+End			9899236
+Sampling9899704
+Wireless Data		9909384
+pid loop		9909868
+ESC Bitbanging		9910800
+End			9919236
+Sampling9919716
+Wireless Data		9929368
+pid loop		9929860
+ESC Bitbanging		9930796
+End			9939244
+Sampling9939712
+Wireless Data		9949328
+pid loop		9949812
+ESC Bitbanging		9950748
+End			9959256
+Sampling9959724
+Wireless Data		9969296
+pid loop		9969784
+ESC Bitbanging		9970720
+End			9979256
+Sampling9979728
+Wireless Data		9989272
+pid loop		9989756
+ESC Bitbanging		9990696
+End			9999252
+Sampling9999728
+Wireless Data		10009228
+pid loop		10009768
+ESC Bitbanging		10010744
+End			10019260
+Sampling10019776
+Wireless Data		10029196
+pid loop		10029724
+ESC Bitbanging		10030704
+End			10039264
+Sampling10039796
+Wireless Data		10049164
+pid loop		10049700
+ESC Bitbanging		10050680
+End			10059272
+Sampling10059796
+Wireless Data		10069124
+pid loop		10069656
+ESC Bitbanging		10070640
+End			10079280
+Sampling10079796
+Wireless Data		10089084
+pid loop		10089620
+ESC Bitbanging		10090604
+End			10099276
+Sampling10099800
+Wireless Data		10109052
+pid loop		10109584
+ESC Bitbanging		10110568
+End			10119280
+Sampling10119796
+Wireless Data		10129028
+pid loop		10129568
+ESC Bitbanging		10130548
+End			10139296
+Sampling10139820
+Wireless Data		10148996
+pid loop		10149528
+ESC Bitbanging		10150512
+End			10159296
+Sampling10159816
+Wireless Data		10168940
+pid loop		10169476
+ESC Bitbanging		10170460
+End			10179292
+Sampling10179816
+Wireless Data		10188920
+pid loop		10189448
+ESC Bitbanging		10190432
+End			10199300
+Sampling10199816
+Wireless Data		10208876
+pid loop		10209416
+ESC Bitbanging		10210400
+End			10219308
+Sampling10219836
+Wireless Data		10228856
+pid loop		10229384
+ESC Bitbanging		10230372
+End			10239312
+Sampling10239832
+Wireless Data		10248812
+pid loop		10249344
+ESC Bitbanging		10250328
+End			10259312
+Sampling10259832
+Wireless Data		10268780
+pid loop		10269308
+ESC Bitbanging		10270292
+End			10279316
+Sampling10279832
+Wireless Data		10288780
+pid loop		10289316
+ESC Bitbanging		10290296
+End			10299316
+Sampling10299840
+Wireless Data		10308708
+pid loop		10309240
+ESC Bitbanging		10310220
+End			10319328
+Sampling10319848
+Wireless Data		10328680
+pid loop		10329216
+ESC Bitbanging		10330196
+End			10339340
+Sampling10339856
+Wireless Data		10348648
+pid loop		10349176
+ESC Bitbanging		10350160
+End			10359336
+Sampling10359860
+Wireless Data		10368612
+pid loop		10369148
+ESC Bitbanging		10370132
+End			10379340
+Sampling10379860
+Wireless Data		10388584
+pid loop		10389112
+ESC Bitbanging		10390096
+End			10399356
+Sampling10399880
+Wireless Data		10408544
+pid loop		10409080
+ESC Bitbanging		10410060
+End			10419356
+Sampling10419872
+Wireless Data		10428512
+pid loop		10429044
+ESC Bitbanging		10430032
+End			10439352
+Sampling10439876
+Wireless Data		10448484
+pid loop		10449020
+ESC Bitbanging		10450000
+End			10459356
+Sampling10459876
+Wireless Data		10468432
+pid loop		10468960
+ESC Bitbanging		10469948
+End			10479368
+Sampling10479892
+Wireless Data		10488432
+pid loop		10488968
+ESC Bitbanging		10489952
+End			10499372
+Sampling10499888
+Wireless Data		10508364
+pid loop		10508896
+ESC Bitbanging		10509876
+End			10519372
+Sampling10519892
+Wireless Data		10528344
+pid loop		10528880
+ESC Bitbanging		10529860
+End			10539372
+Sampling10539888
+Wireless Data		10548320
+pid loop		10548848
+ESC Bitbanging		10549832
+End			10559376
+Sampling10559900
+Wireless Data		10568256
+pid loop		10568792
+ESC Bitbanging		10569776
+End			10579392
+Sampling10579908
+Wireless Data		10588240
+pid loop		10588768
+ESC Bitbanging		10589748
+End			10599392
+Sampling10599916
+Wireless Data		10608204
+pid loop		10608740
+ESC Bitbanging		10609716
+End			10619388
+Sampling10619912
+Wireless Data		10628172
+pid loop		10628704
+ESC Bitbanging		10629684
+End			10639400
+Sampling10639916
+Wireless Data		10648136
+pid loop		10648672
+ESC Bitbanging		10649656
+End			10659396
+Sampling10659924
+Wireless Data		10668112
+pid loop		10668640
+ESC Bitbanging		10669624
+End			10679408
+Sampling10679924
+Wireless Data		10688072
+pid loop		10688608
+ESC Bitbanging		10689588
+End			10699408
+Sampling10699932
+Wireless Data		10708040
+pid loop		10708572
+ESC Bitbanging		10709552
+End			10719416
+Sampling10719932
+Wireless Data		10728004
+pid loop		10728540
+ESC Bitbanging		10729524
+End			10739416
+Sampling10739940
+Wireless Data		10747976
+pid loop		10748508
+ESC Bitbanging		10749488
+End			10759432
+Sampling10759948
+Wireless Data		10767940
+pid loop		10768476
+ESC Bitbanging		10769460
+End			10779432
+Sampling10779956
+Wireless Data		10787912
+pid loop		10788444
+ESC Bitbanging		10789424
+End			10799432
+Sampling10799948
+Wireless Data		10807876
+pid loop		10808412
+ESC Bitbanging		10809396
+End			10819432
+Sampling10819956
+Wireless Data		10827820
+pid loop		10828352
+ESC Bitbanging		10829336
+End			10839448
+Sampling10839964
+Wireless Data		10847832
+pid loop		10848368
+ESC Bitbanging		10849352
+End			10859448
+Sampling10859972
+Wireless Data		10867764
+pid loop		10868296
+ESC Bitbanging		10869280
+End			10879444
+Sampling10879964
+Wireless Data		10887768
+pid loop		10888304
+ESC Bitbanging		10889288
+End			10899452
+Sampling10899972
+Wireless Data		10907704
+pid loop		10908232
+ESC Bitbanging		10909216
+End			10919456
+Sampling10919976
+Wireless Data		10927664
+pid loop		10928200
+ESC Bitbanging		10929188
+End			10939468
+Sampling10939984
+Wireless Data		10947644
+pid loop		10948172
+ESC Bitbanging		10949156
+End			10959464
+Sampling10959988
+Wireless Data		10967608
+pid loop		10968144
+ESC Bitbanging		10969132
+End			10979472
+Sampling10979988
+Wireless Data		10987552
+pid loop		10988080
+ESC Bitbanging		10989068
+End			10999472
+Sampling10999996
+Wireless Data		11007528
+pid loop		11008068
+ESC Bitbanging		11009052
+End			11019476
+Sampling11020000
+Wireless Data		11027508
+pid loop		11028036
+ESC Bitbanging		11029028
+End			11039488
+Sampling11040016
+Wireless Data		11047476
+pid loop		11048012
+ESC Bitbanging		11049000
+End			11059488
+Sampling11060004
+Wireless Data		11067432
+pid loop		11067964
+ESC Bitbanging		11068952
+End			11079488
+Sampling11080012
+Wireless Data		11087424
+pid loop		11087960
+ESC Bitbanging		11088948
+End			11099492
+Sampling11100008
+Wireless Data		11107392
+pid loop		11107924
+ESC Bitbanging		11108908
+End			11119492
+Sampling11120020
+Wireless Data		11127340
+pid loop		11127880
+ESC Bitbanging		11128864
+End			11139496
+Sampling11140016
+Wireless Data		11147280
+pid loop		11147812
+ESC Bitbanging		11148804
+End			11159504
+Sampling11160028
+Wireless Data		11167268
+pid loop		11167804
+ESC Bitbanging		11168792
+End			11179504
+Sampling11180024
+Wireless Data		11187236
+pid loop		11187768
+ESC Bitbanging		11188756
+End			11199516
+Sampling11200032
+Wireless Data		11207192
+pid loop		11207728
+ESC Bitbanging		11208716
+End			11219512
+Sampling11220036
+Wireless Data		11227164
+pid loop		11227692
+ESC Bitbanging		11228680
+End			11239516
+Sampling11240032
+Wireless Data		11247124
+pid loop		11247660
+ESC Bitbanging		11248648
+End			11259524
+Sampling11260048
+Wireless Data		11267132
+pid loop		11267660
+ESC Bitbanging		11268648
+End			11279524
+Sampling11280040
+Wireless Data		11287084
+pid loop		11287620
 
 -----------------------------------------------
-Date: 06-Mar-16 - 8:33:38 PM
+Date: 07-Mar-16 - 3:00:11 AM
 End log file

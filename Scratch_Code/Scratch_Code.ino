@@ -1,3 +1,4 @@
+#include<EEPROM.h>
 ////////////////HEADER FILES FOR I2C AND MPU////////////////1
 #include "MPU6050_6Axis_MotionApps20.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
@@ -19,7 +20,7 @@ MPU6050 mpu;
 
 ///////////////////////////VARIABLES///////////////////////////////////////////////////////////3
 
-long int start, stopp, timer,value,valuefr=0,valuebr=0,valuebl=0,valuefl=0;
+long int a,b,c,start,start1,stopp, timer,value,valuefr=0,valuebr=0,valuebl=0,valuefl=0;
 char chara;
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -161,7 +162,7 @@ Serial.println(F("GET READY"));
 		while (micros() - start < 20000);
 	}
 	*////////////////////////////////////////////////
-  
+ 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -171,17 +172,9 @@ Serial.println(F("GET READY"));
 
 ///////////////////////////////////////FEEDBACK LOOP @50Hz//////////////////////////////////////////////////////////
 void loop()
-{
-  start=micros();
-Serial.print(F("Sampling time\t\t"));  
-Serial.println(micros(),DEC);
-Serial.print(F("begin\t\t\t"));
-Serial.println(micros(),DEC);
-  
-Serial.print(F("dmp data\t\t"));  
-Serial.println(micros(),DEC);
-
-
+{  
+  Serial.print("Sampling");
+  Serial.println(micros());
 	////////////////////////GET DMP DATA//////////////////////////10
 	if (!dmpReady) return;
 	while (!mpuInterrupt && fifoCount < packetSize);
@@ -314,16 +307,18 @@ Serial.println(micros(),DEC);
   if(valuefr<600)valuefr=580;if(valuefr>1200)valuefr=1200;
   valuefl=((    +   pid_output_pitch  +   pid_output_roll) ) +value;
 	if(valuefl<580)valuefl=580;if(valuefl>1200)valuefl=1200;
+	start1=micros();
 	PORTD |= B11011000;
-	while ((micros() - start) < 2500)
+	while ((micros() - start1) < 2500)
 	{
 		if(micros()-start>valuebr) PORTD &= B01011011;
 		if(micros()-start>valuebl) PORTD &= B10011011;
 		if(micros()-start>valuefr) PORTD &= B11001011;
 		if(micros()-start>valuefl) PORTD &= B11010011;
 	}
-	while (micros() - start < 20000);
+	while (micros() - start < 19996);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ start=micros();
 Serial.print(F("End\t\t\t"));
 Serial.println(micros(),DEC);
 }
