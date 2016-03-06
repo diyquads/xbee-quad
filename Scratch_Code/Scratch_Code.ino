@@ -1,5 +1,4 @@
 ////////////////HEADER FILES FOR I2C AND MPU////////////////1
-#include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
 #include "Wire.h"
@@ -21,8 +20,7 @@ MPU6050 mpu;
 ///////////////////////////VARIABLES///////////////////////////////////////////////////////////3
 
 long int start, stopp, timer,value,valuefr=0,valuebr=0,valuebl=0,valuefl=0;
-char buffera[100];
-char * chara;
+char chara;
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
 uint8_t mpuIntStatus;   // holds actual interrupt status byte from MPU
@@ -47,9 +45,9 @@ float pid_i_mem_pitch=0, pid_pitch_setpoint=0, dmp_pitch_input=0, pid_output_pit
 float pid_i_mem_yaw=0, pid_yaw_setpoint=0, dmp_yaw_input=0, pid_output_yaw=0, pid_last_yaw_d_error=0;
 
 //PID gain and limit settings
-float pid_p_gain_roll = 1.3;               //Gain setting for the roll P-controller (1.3)
-float pid_i_gain_roll = 0.3;              //Gain setting for the roll I-controller (0.3)
-float pid_d_gain_roll = 15;                //Gain setting for the roll D-controller (15)
+float pid_p_gain_roll = 0;               //Gain setting for the roll P-controller (1.3)
+float pid_i_gain_roll = 0;              //Gain setting for the roll I-controller (0.3)
+float pid_d_gain_roll = 0;                //Gain setting for the roll D-controller (15)
 int pid_max_roll = 400;                    //Maximum output of the PID-controller (+/-)
 
 float pid_p_gain_pitch = pid_p_gain_roll;  //Gain setting for the pitch P-controller.
@@ -91,7 +89,9 @@ void setup() {
 #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
 	Fastwire::setup(400, true);
 #endif
-	Serial.begin(115200);
+delay(9000);
+	Serial.begin(57600);
+Serial.println("GET READY");
 	/////////////////////////////////////////////////////
 
 
@@ -106,8 +106,10 @@ void setup() {
 
 	///////////MPU STUFF////////////////////7
 	mpu.initialize();
+ Serial.println("Initializing MPU");
 	if (!mpu.testConnection())
 	exit(0);
+  Serial.println("MPU Connection Succesful");
 	devStatus = mpu.dmpInitialize();
 	if (devStatus == 0)
 	{
@@ -137,7 +139,7 @@ void setup() {
 
 
 
-	////////////////ACTIVATING ESCS/////////////////8
+	/*///////////////ACTIVATING ESCS/////////////////8
 	value = 2400;
 	timer = millis();
 	while ((millis() - timer) < 5000)
@@ -146,7 +148,7 @@ void setup() {
 		PORTD |= B11011000;
 		while ((micros() - start) < value);
 		PORTD &= B00000011;
-		while (micros() - start < 50000);
+		while (micros() - start < 20000);
 	}
 	timer = millis();
 	value = 600;
@@ -158,7 +160,7 @@ void setup() {
 		PORTD &= B00000011;
 		while (micros() - start < 20000);
 	}
-	////////////////////////////////////////////////
+	*////////////////////////////////////////////////
   
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,7 +172,13 @@ void setup() {
 ///////////////////////////////////////FEEDBACK LOOP @50Hz//////////////////////////////////////////////////////////
 void loop()
 {
-
+Serial.print("Sampling time\t\t");  
+Serial.println(micros(),DEC);
+Serial.print("begin\t\t\t");
+Serial.println(micros(),DEC);
+  
+Serial.print("dmp data\t\t");  
+Serial.println(micros(),DEC);
 
 
 	////////////////////////GET DMP DATA//////////////////////////10
@@ -191,42 +199,70 @@ void loop()
 		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity); 
 	}
 	///////////////////////////////////////////////////////////////////
-
+Serial.print("Wireless Data\t\t");
+Serial.println(micros(),DEC);
 	/////////////////////////Recieve Wireless Data//////////////////////9
 pid_roll_setpoint=0;
 pid_pitch_setpoint=0;
 pid_yaw_setpoint=0;
-/*
+
 if (Serial.available())
 {
-	buffera = Serial.read();
-	buffera.toCharArray(chara,20);
-	if (*chara == 'y')
+  chara=Serial.read();
+	if (chara == 'p')
 	{
-	chara++;
-	buffera = chara;
-	pid_yaw_setpoint = buffera.toFloat();
+  pid_p_gain_roll+=.1;
+  pid_p_gain_pitch+=.1;
+  Serial.println(pid_p_gain_roll,DEC);
 	}
-	else if (*chara == 'p')
+	else if (chara == 'o')
 	{
-	chara++;
-	buffera = chara;
-	pid_pitch_setpoint = buffera.toFloat();
+  pid_p_gain_roll-=.1;
+  pid_p_gain_pitch-=.1;
+  Serial.println(pid_p_gain_roll,DEC);
 	}
-	else if (*chara == 'r')
+	else if (chara == 'i')
 	{
-	chara++;
-	buffera = chara;
-	pid_roll_setpoint = buffera.toFloat();
+	pid_i_gain_roll+=.01;
+  pid_i_gain_pitch+=.01;
+  Serial.println(pid_i_gain_roll,DEC);
 	}
-	else if (*chara == 'a')
+	else if (chara == 'u')
 	{
-	chara++;
-	buffera = chara;
-	value = buffera.toFloat();
+  pid_i_gain_roll-=.01;
+  pid_i_gain_pitch-=.01;
+	Serial.println(pid_i_gain_roll,DEC);
 	}
+  else if (chara == 'd')
+  {
+    pid_d_gain_roll+=.1;
+    pid_d_gain_pitch+=.1;
+    Serial.println(pid_d_gain_roll,DEC);
+  }
+  else if (chara == 's')
+  {
+    pid_d_gain_roll-=.1;
+    pid_d_gain_pitch-=.1;
+    Serial.println(pid_d_gain_roll,DEC);
+  }
+  else if(chara=='a')
+  {
+    Serial.println(pid_p_gain_roll,DEC);
+    Serial.println(pid_i_gain_roll,DEC);
+    Serial.println(pid_d_gain_roll,DEC);
+  }
+  else if(chara=='t')
+  {
+  value+=10;
+  Serial.println(value,DEC);
+  }
+  else if(chara=='r')
+  {
+  value-=10;
+  Serial.println(value,DEC);
+ }
 }
-else
+/*else
 {
 	if (pid_pitch_setpoint > 10)
 	pid_pitch_setpoint /= 2;
@@ -250,16 +286,16 @@ else
 	
 
 
-
-
+Serial.print("pid loop\t\t");
+Serial.println(micros(),DEC);
 	//////////////////////CALL PID/////////////////////////////////////11
 	pid();
 	/////////////////////////////////////////////////////////////////////
 
 
 
-
-
+Serial.print("ESC Bitbanging\t\t");
+Serial.println(micros(),DEC);
 	//////////////////////ESC BITBANGING//////////////////////////12
 	//7=br
 	//6=bl
@@ -268,18 +304,18 @@ else
   //clockwise yaw +ve
   //right roll +ve
   //backwards pitch +ve
-  value=700;
-  valuebr=((  pid_output_yaw  -   pid_output_pitch  -   pid_output_roll)  *value/400) + value;
+  value=1600;
+  valuebr=((    -   pid_output_pitch  -   pid_output_roll)  ) + value;
 	if(valuebr<580)valuebr=580;if(valuebr>1200)valuebr=1200;
-	valuebl=((  -pid_output_yaw -   pid_output_pitch  +   pid_output_roll) *value/400) +value;
-  if(valuebl<580)valuebl=580;if(valuebl>1200)valuebl=1200;
-  valuefr=((  -pid_output_yaw +   pid_output_pitch  -   pid_output_roll)  *value/400) +value;
-  if(valuefr<580)valuefr=580;if(valuefr>1200)valuefr=1200;
-  valuefl=((  pid_output_yaw  +   pid_output_pitch  +   pid_output_roll)  *value/400) +value;
+	valuebl=((   -   pid_output_pitch  +   pid_output_roll) ) +value;
+  if(valuebl<600)valuebl=580;if(valuebl>1200)valuebl=1200;
+  valuefr=((   +   pid_output_pitch  -   pid_output_roll)  ) +value;
+  if(valuefr<600)valuefr=580;if(valuefr>1200)valuefr=1200;
+  valuefl=((    +   pid_output_pitch  +   pid_output_roll) ) +value;
 	if(valuefl<580)valuefl=580;if(valuefl>1200)valuefl=1200;
 	start = micros();
 	PORTD |= B11011000;
-	while ((micros() - start) < 3000)
+	while ((micros() - start) < 2500)
 	{
 		if(micros()-start>valuebr) PORTD &= B01011011;
 		if(micros()-start>valuebl) PORTD &= B10011011;
@@ -288,6 +324,8 @@ else
 	}
 	while (micros() - start < 20000);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Serial.print("End\t\t\t");
+Serial.println(micros(),DEC);
 }
 
 
@@ -311,8 +349,7 @@ void pid()
 	else if (pid_output_roll < pid_max_roll * -1)pid_output_roll = pid_max_roll * -1;
 
 	pid_last_roll_d_error = pid_error_temp;
-	Serial.print(pid_output_roll,DEC);Serial.print('\t');
-	Serial.print(ypr[2]*180/M_PI,DEC);Serial.print('\t');
+	
 	//Pitch calculations
 	pid_error_temp = dmp_pitch_input - pid_pitch_setpoint;
 	pid_i_mem_pitch += pid_i_gain_pitch * pid_error_temp;
@@ -324,8 +361,7 @@ void pid()
 	else if (pid_output_pitch < pid_max_pitch * -1)pid_output_pitch = pid_max_pitch * -1;
 
 	pid_last_pitch_d_error = pid_error_temp;
-	Serial.print(pid_output_pitch,DEC);Serial.print('\t');
-	Serial.print(ypr[1]*180/M_PI,DEC);Serial.print('\t');
+	
 	//Yaw calculations
 	pid_error_temp = dmp_yaw_input - pid_yaw_setpoint;
 	pid_i_mem_yaw += pid_i_gain_yaw * pid_error_temp;
@@ -337,6 +373,6 @@ void pid()
 	else if (pid_output_yaw < pid_max_yaw * -1)pid_output_yaw = pid_max_yaw * -1;
 
 	pid_last_yaw_d_error = pid_error_temp;
-	Serial.print(pid_output_yaw,DEC);Serial.print('\t');Serial.print(ypr[0]*180/M_PI,DEC);Serial.println('\t');
+	
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
