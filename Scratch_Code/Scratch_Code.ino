@@ -1,9 +1,11 @@
-#include<EEPROM.h>
 ////////////////HEADER FILES FOR I2C AND MPU////////////////1
+#include"I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
 #include "Wire.h"
 #endif
+#define THROTTLE_MAX  1600
+#define THROTTLE_MIN  580
 ////////////////////////////////////////////////////////////
 
 
@@ -20,7 +22,7 @@ MPU6050 mpu;
 
 ///////////////////////////VARIABLES///////////////////////////////////////////////////////////3
 
-long int a,b,c,start,start1,stopp, timer,value,valuefr=0,valuebr=0,valuebl=0,valuefl=0;
+long int a,b,c,start,start1,stopp, timer,value,valuefr=0,valuebr=0,valuebl=0,valuefl=0,count;
 char chara;
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -28,7 +30,7 @@ uint8_t mpuIntStatus;   // holds actual interrupt status byte from MPU
 uint8_t devStatus;      // return status after each device operation (0 = success, !0 = error)
 uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
 uint16_t fifoCount;     // count of all bytes currently in FIFO
-uint8_t fifobuffer[64]; // FIFO storage buffera
+uint8_t fifoBuffer[64]; // FIFO storage buffera
 
 // orientation/motion vars
 Quaternion q;           // [w, x, y, z]         quaternion container
@@ -46,7 +48,7 @@ float pid_i_mem_pitch=0, pid_pitch_setpoint=0, dmp_pitch_input=0, pid_output_pit
 float pid_i_mem_yaw=0, pid_yaw_setpoint=0, dmp_yaw_input=0, pid_output_yaw=0, pid_last_yaw_d_error=0;
 
 //PID gain and limit settings
-float pid_p_gain_roll = 0;               //Gain setting for the roll P-controller (1.3)
+float pid_p_gain_roll = 1.0;               //Gain setting for the roll P-controller (1.3)
 float pid_i_gain_roll = 0;              //Gain setting for the roll I-controller (0.3)
 float pid_d_gain_roll = 0;                //Gain setting for the roll D-controller (15)
 int pid_max_roll = 400;                    //Maximum output of the PID-controller (+/-)
@@ -90,27 +92,27 @@ void setup() {
 #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
 	Fastwire::setup(400, true);
 #endif
-delay(9000);
+	//delay(9000);
 	Serial.begin(57600);
-Serial.println(F("GET READY"));
+	Serial.println(F("GET READY"));
 	/////////////////////////////////////////////////////
 
 
 
 
-////////////////PORT INITIALIZATION//////////////////6
-  DDRD |= B11011000;
-  DDRB |= B00110000;
-  PORTB |= B00110000;
-  ////////////////////////////////////////////////////
+	////////////////PORT INITIALIZATION//////////////////6
+	DDRD |= B11011000;
+	DDRB |= B00110001;
+	PORTB |= B00110001;
+	////////////////////////////////////////////////////
 
 
 	///////////MPU STUFF////////////////////7
 	mpu.initialize();
- Serial.println(F("Initializing MPU"));
+	Serial.println(F("Initializing MPU"));
 	if (!mpu.testConnection())
 	exit(0);
-  Serial.println(F("MPU Connection Succesful"));
+	Serial.println(F("MPU Connection Succesful"));
 	devStatus = mpu.dmpInitialize();
 	if (devStatus == 0)
 	{
@@ -120,15 +122,15 @@ Serial.println(F("GET READY"));
 		dmpReady = true;
 		packetSize = mpu.dmpGetFIFOPacketSize();
 	}
- //Your offsets: -1097 2131  2489  76  -82 9
+	//Your offsets: -1097 2131  2489  76  -82 9
 
- 
-  mpu.setXAccelOffset(-1097);
-  mpu.setYAccelOffset(2131);
-  mpu.setZAccelOffset(2489);
-  mpu.setXGyroOffset(76);
-  mpu.setYGyroOffset(-82);
-  mpu.setZGyroOffset(9);
+
+	mpu.setXAccelOffset(-1097);
+	mpu.setYAccelOffset(2131);
+	mpu.setZAccelOffset(2489);
+	mpu.setXGyroOffset(76);
+	mpu.setYGyroOffset(-82);
+	mpu.setZGyroOffset(9);
 	/////////////////////////////////////////
 
 
@@ -162,7 +164,7 @@ Serial.println(F("GET READY"));
 		while (micros() - start < 20000);
 	}
 	*////////////////////////////////////////////////
- 
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -173,90 +175,73 @@ Serial.println(F("GET READY"));
 ///////////////////////////////////////FEEDBACK LOOP @50Hz//////////////////////////////////////////////////////////
 void loop()
 {  
-  Serial.print("Sampling");
-  Serial.println(micros());
-	////////////////////////GET DMP DATA//////////////////////////10
-	if (!dmpReady) return;
-	while (!mpuInterrupt && fifoCount < packetSize);
-	mpuInterrupt = false;
-	mpuIntStatus = mpu.getIntStatus();
-	fifoCount = mpu.getFIFOCount();
-	if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
-		mpu.resetFIFO();
-		Serial.println(F("FIFO overflow!"));
-	} else if (mpuIntStatus & 0x02) {
-		while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
-		mpu.getFIFOBytes(fifobuffer, packetSize);
-		fifoCount -= packetSize;
-		mpu.dmpGetQuaternion(&q, fifobuffer);
-		mpu.dmpGetGravity(&gravity, &q);
-		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity); 
-	}
-	///////////////////////////////////////////////////////////////////
-Serial.print(F("Wireless Data\t\t"));
-Serial.println(micros(),DEC);
-	/////////////////////////Recieve Wireless Data//////////////////////9
-pid_roll_setpoint=0;
-pid_pitch_setpoint=0;
-pid_yaw_setpoint=0;
 
-if (Serial.available())
-{
-  chara=Serial.read();
-	if (chara == 'p')
+	if (!dmpReady) return;
+
+
+
+	/////////////////////////Recieve Wireless Data//////////////////////9
+	pid_roll_setpoint=0;
+	pid_pitch_setpoint=0;
+	pid_yaw_setpoint=0;
+
+	if (Serial.available())
 	{
-  pid_p_gain_roll+=.1;
-  pid_p_gain_pitch+=.1;
-  Serial.println(pid_p_gain_roll,DEC);
+		chara=Serial.read();
+		if (chara == 'p')
+		{
+			pid_p_gain_roll+=.1;
+			pid_p_gain_pitch+=.1;
+			Serial.println(pid_p_gain_roll,DEC);
+		}
+		else if (chara == 'o')
+		{
+			pid_p_gain_roll-=.1;
+			pid_p_gain_pitch-=.1;
+			Serial.println(pid_p_gain_roll,DEC);
+		}
+		else if (chara == 'i')
+		{
+			pid_i_gain_roll+=.01;
+			pid_i_gain_pitch+=.01;
+			Serial.println(pid_i_gain_roll,DEC);
+		}
+		else if (chara == 'u')
+		{
+			pid_i_gain_roll-=.01;
+			pid_i_gain_pitch-=.01;
+			Serial.println(pid_i_gain_roll,DEC);
+		}
+		else if (chara == 'd')
+		{
+			pid_d_gain_roll+=.1;
+			pid_d_gain_pitch+=.1;
+			Serial.println(pid_d_gain_roll,DEC);
+		}
+		else if (chara == 's')
+		{
+			pid_d_gain_roll-=.1;
+			pid_d_gain_pitch-=.1;
+			Serial.println(pid_d_gain_roll,DEC);
+		}
+		else if(chara=='a')
+		{
+			Serial.println(pid_p_gain_roll,DEC);
+			Serial.println(pid_i_gain_roll,DEC);
+			Serial.println(pid_d_gain_roll,DEC);
+		}
+		else if(chara=='t')
+		{
+			value+=10;
+			Serial.println(value,DEC);
+		}
+		else if(chara=='r')
+		{
+			value-=10;
+			Serial.println(value,DEC);
+		}
 	}
-	else if (chara == 'o')
-	{
-  pid_p_gain_roll-=.1;
-  pid_p_gain_pitch-=.1;
-  Serial.println(pid_p_gain_roll,DEC);
-	}
-	else if (chara == 'i')
-	{
-	pid_i_gain_roll+=.01;
-  pid_i_gain_pitch+=.01;
-  Serial.println(pid_i_gain_roll,DEC);
-	}
-	else if (chara == 'u')
-	{
-  pid_i_gain_roll-=.01;
-  pid_i_gain_pitch-=.01;
-	Serial.println(pid_i_gain_roll,DEC);
-	}
-  else if (chara == 'd')
-  {
-    pid_d_gain_roll+=.1;
-    pid_d_gain_pitch+=.1;
-    Serial.println(pid_d_gain_roll,DEC);
-  }
-  else if (chara == 's')
-  {
-    pid_d_gain_roll-=.1;
-    pid_d_gain_pitch-=.1;
-    Serial.println(pid_d_gain_roll,DEC);
-  }
-  else if(chara=='a')
-  {
-    Serial.println(pid_p_gain_roll,DEC);
-    Serial.println(pid_i_gain_roll,DEC);
-    Serial.println(pid_d_gain_roll,DEC);
-  }
-  else if(chara=='t')
-  {
-  value+=10;
-  Serial.println(value,DEC);
-  }
-  else if(chara=='r')
-  {
-  value-=10;
-  Serial.println(value,DEC);
- }
-}
-/*else
+	/*else
 {
 	if (pid_pitch_setpoint > 10)
 	pid_pitch_setpoint /= 2;
@@ -277,51 +262,74 @@ if (Serial.available())
 
 
 
-	
+	////////////////////////GET DMP DATA//////////////////////////10
+	if(mpuInterrupt){
+		fifoCount=mpu.getFIFOCount();
+		while(fifoCount>=packetSize){
+			mpuInterrupt=false;
+			mpuIntStatus=mpu.getIntStatus();
+			if((mpuIntStatus & 0x10)||fifoCount==1024)
+			{
+				mpu.resetFIFO();
+				Serial.println(F("FIFO Overflow Shitface!"));
+			}
+			else if(mpuIntStatus & 0x02)
+			{
+				Serial.print(fifoCount);Serial.print('\t');
+				fifoCount-=packetSize;
+				mpu.getFIFOBytes(fifoBuffer,packetSize);
+				mpu.dmpGetQuaternion(&q,fifoBuffer);
+				mpu.dmpGetGravity(&gravity,&q);
+				mpu.dmpGetYawPitchRoll(ypr,&q,&gravity);
+			  Serial.print(q.w);Serial.print('\t');Serial.print(q.x);Serial.print('\t');Serial.print(q.y);Serial.print('\t');Serial.println(q.z);
+			  //Serial.print(q[0]);Serial.print('\t');Serial.print(q[1]);Serial.print('\t');Serial.print(q[2]);Serial.print('\t');Serial.println(q[3]);
+			}
+		}
+	}
+	///////////////////////////////////////////////////////////////
 
 
-Serial.print(F("pid loop\t\t"));
-Serial.println(micros(),DEC);
 	//////////////////////CALL PID/////////////////////////////////////11
 	pid();
+	
+
 	/////////////////////////////////////////////////////////////////////
 
 
 
-Serial.print(F("ESC Bitbanging\t\t"));
-Serial.println(micros(),DEC);
+
+
 	//////////////////////ESC BITBANGING//////////////////////////12
 	//7=br
 	//6=bl
 	//4=fr
 	//3=fl
-  //clockwise yaw +ve
-  //right roll +ve
-  //backwards pitch +ve
-  value=1600;
-  valuebr=((    -   pid_output_pitch  -   pid_output_roll)  ) + value;
-	if(valuebr<580)valuebr=580;if(valuebr>1200)valuebr=1200;
+	//clockwise yaw +ve
+	//right roll +ve
+	//backwards pitch +ve
+	value=1000;
+	valuebr=((    -   pid_output_pitch  -   pid_output_roll)  ) + value;
+	if(valuebr<THROTTLE_MIN)valuebr=THROTTLE_MIN;if(valuebr>THROTTLE_MAX)valuebr=THROTTLE_MAX;
 	valuebl=((   -   pid_output_pitch  +   pid_output_roll) ) +value;
-  if(valuebl<600)valuebl=580;if(valuebl>1200)valuebl=1200;
-  valuefr=((   +   pid_output_pitch  -   pid_output_roll)  ) +value;
-  if(valuefr<600)valuefr=580;if(valuefr>1200)valuefr=1200;
-  valuefl=((    +   pid_output_pitch  +   pid_output_roll) ) +value;
-	if(valuefl<580)valuefl=580;if(valuefl>1200)valuefl=1200;
+	if(valuebl<THROTTLE_MIN)valuebl=THROTTLE_MIN;if(valuebl>THROTTLE_MAX)valuebl=THROTTLE_MAX;
+	valuefr=((   +   pid_output_pitch  -   pid_output_roll)  ) +value;
+	if(valuefr<THROTTLE_MIN)valuefr=THROTTLE_MIN;if(valuefr>THROTTLE_MAX)valuefr=THROTTLE_MAX;
+	valuefl=((    +   pid_output_pitch  +   pid_output_roll) ) +value;
+	if(valuefl<THROTTLE_MIN)valuefl=THROTTLE_MIN;if(valuefl>THROTTLE_MAX)valuefl=THROTTLE_MAX;
 	start1=micros();
-	PORTD |= B11011000;
+	//PORTD |= B11011000;
 	while ((micros() - start1) < 2500)
 	{
-		if(micros()-start>valuebr) PORTD &= B01011011;
-		if(micros()-start>valuebl) PORTD &= B10011011;
-		if(micros()-start>valuefr) PORTD &= B11001011;
-		if(micros()-start>valuefl) PORTD &= B11010011;
+		//if(micros()-start>valuebr) PORTD &= B01011011;
+		//if(micros()-start>valuebl) PORTD &= B10011011;
+		//if(micros()-start>valuefr) PORTD &= B11001011;
+		//if(micros()-start>valuefl) PORTD &= B11010011;
 	}
 	while (micros() - start < 19996);
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- start=micros();
-Serial.print(F("End\t\t\t"));
-Serial.println(micros(),DEC);
+	start=micros();
 }
+
 
 
 
@@ -329,10 +337,9 @@ Serial.println(micros(),DEC);
 //////////////////////////Subroutine to Calculate PID Controller Correction Values///////////////13
 void pid()
 {
-	dmp_roll_input = -ypr[2]*180/M_PI ;
-	dmp_pitch_input = -ypr[1] *180/M_PI;
-	dmp_yaw_input = -ypr[0] *180/M_PI;
-
+	dmp_roll_input = -1*ypr[2]*180/M_PI ;
+	dmp_pitch_input = -1*ypr[1] *180/M_PI;
+	dmp_yaw_input = -1*ypr[0] *180/M_PI;
 	//Roll calculations
 	pid_error_temp = dmp_roll_input - pid_roll_setpoint;
 	pid_i_mem_roll += pid_i_gain_roll * pid_error_temp;
