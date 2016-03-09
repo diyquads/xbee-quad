@@ -11,6 +11,7 @@
 #include<Servo.h>
 Servo m1,m2,m3,m4;
 boolean blinkState;
+float batteryVoltage;
 
 /////////MPU OBJECT////2
 MPU6050 mpu;
@@ -48,9 +49,9 @@ float pid_i_mem_pitch=0, pid_pitch_setpoint=0, dmp_pitch_input=0, pid_output_pit
 float pid_i_mem_yaw=0, pid_yaw_setpoint=0, dmp_yaw_input=0, pid_output_yaw=0, pid_last_yaw_d_error=0;
 
 //PID gain and limit settings
-float pid_p_gain_roll = -75*M_PI/90;               //Gain setting for the roll P-controller (150)
-float pid_i_gain_roll = 0.5*M_PI/90;              //Gain setting for the roll I-controller (1)
-float pid_d_gain_roll = 1000*M_PI/90;                //Gain setting for the roll D-controller (750
+float pid_p_gain_roll = 100;               //Gain setting for the roll P-controller (1.3)
+float pid_i_gain_roll = 0.1;              //Gain setting for the roll I-controller (0.3)
+float pid_d_gain_roll = 0.01;                //Gain setting for the roll D-controller (15)
 int pid_max_roll = 400;                    //Maximum output of the PID-controller (+/-)
 
 float pid_p_gain_pitch = pid_p_gain_roll;  //Gain setting for the pitch P-controller.
@@ -58,9 +59,9 @@ float pid_i_gain_pitch = pid_i_gain_roll;  //Gain setting for the pitch I-contro
 float pid_d_gain_pitch = pid_d_gain_roll;  //Gain setting for the pitch D-controller.
 int pid_max_pitch = pid_max_roll;          //Maximum output of the PID-controller (+/-)
 
-float pid_p_gain_yaw = 4.0*M_PI/90;                //Gain setting for the pitch P-controller. //4.0
-float pid_i_gain_yaw = 0.02*M_PI/90;               //Gain setting for the pitch I-controller. //0.02
-float pid_d_gain_yaw = 1*M_PI/90;                //Gain setting for the pitch D-controller.
+float pid_p_gain_yaw = 4.0;                //Gain setting for the pitch P-controller. //4.0
+float pid_i_gain_yaw = 0.02;               //Gain setting for the pitch I-controller. //0.02
+float pid_d_gain_yaw = 1;                //Gain setting for the pitch D-controller.
 int pid_max_yaw = 400;                     //Maximum output of the PID-controller (+/-)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -86,7 +87,7 @@ m2.attach(4);
 m3.attach(6);
 m4.attach(7);
 	
-	
+	batteryVoltage=analogRead(5)/1011*1.7;
 	
 	
 	//////////////INITIAL1ZING COMMUNICATIONS////////////5
@@ -159,7 +160,7 @@ m4.attach(7);
 void loop()
 {  
 
-	if (!dmpReady) return;
+	if (!dmpReady||batteryVoltage<6.5) return;
 
 
     // wait for MPU interrupt or extra packet(s) available
@@ -259,6 +260,8 @@ void loop()
   //clockwise yaw +ve
   //right roll +ve
   //backwards pitch +ve
+  batteryVoltage=batteryVoltage*.92+(analogRead(5)/1011*1.7);
+  if(batteryVoltage<
   value=1200;
   valuebr=((    -   pid_output_pitch  ) ) + value;
   if(valuebr<THROTTLE_MIN)valuebr=THROTTLE_MIN;if(valuebr>THROTTLE_MAX)valuebr=THROTTLE_MAX;
@@ -268,11 +271,11 @@ void loop()
   if(valuefr<THROTTLE_MIN)valuefr=THROTTLE_MIN;if(valuefr>THROTTLE_MAX)valuefr=THROTTLE_MAX;
   valuefl=((    +   pid_output_pitch  ) ) +value;
   if(valuefl<THROTTLE_MIN)valuefl=THROTTLE_MIN;if(valuefl>THROTTLE_MAX)valuefl=THROTTLE_MAX;
-  //Serial.println(valuebr);
-  m1.writeMicroseconds(valuebr);
-  m2.writeMicroseconds(valuebl);
-  m3.writeMicroseconds(valuefr);
-  m4.writeMicroseconds(valuefl);
+
+  m1.writeMicroseconds(valuefl);
+  m2.writeMicroseconds(valuefr);
+  m3.writeMicroseconds(valuebl);
+  m4.writeMicroseconds(valuebr);
   
 
 
@@ -333,9 +336,9 @@ void loop()
 //////////////////////////Subroutine to Calculate PID Controller Correction Values///////////////13
 void pid()
 {
-	dmp_roll_input = -1*ypr[2]*90/M_PI;
-	dmp_pitch_input = -1*ypr[1]*90/M_PI;
-	dmp_yaw_input = -1*ypr[0]*90/M_PI;
+	dmp_roll_input = -1*ypr[2] ;
+	dmp_pitch_input = ypr[1];
+	dmp_yaw_input = -1*ypr[0];
 	//Roll calculations
 	pid_error_temp =dmp_roll_input - pid_roll_setpoint;
  pid_i_mem_roll += pid_i_gain_roll * pid_error_temp;
@@ -357,6 +360,7 @@ void pid()
   pid_output_pitch = pid_p_gain_pitch * pid_error_temp + pid_i_mem_pitch + pid_d_gain_pitch * (pid_error_temp - pid_last_pitch_d_error);
   if(pid_output_pitch > pid_max_pitch)pid_output_pitch = pid_max_pitch;
   else if(pid_output_pitch < pid_max_pitch * -1)pid_output_pitch = pid_max_pitch * -1;
+  
   pid_last_pitch_d_error = pid_error_temp;
   
   //Yaw calculations
@@ -373,7 +377,8 @@ void pid()
             /*Serial.print(pid_output_yaw);
             Serial.print("\t");
             Serial.print(pid_output_pitch);
-            Serial.print("\t");*/
-            
+            Serial.print("\t");
+            Serial.println(pid_output_roll);
+*/
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
