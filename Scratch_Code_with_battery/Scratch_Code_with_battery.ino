@@ -4,13 +4,14 @@
 #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
 #include "Wire.h"
 #endif
-float THROTTLE_MAX =1800;
-float THROTTLE_MIN =1000;
+#define THROTTLE_MAX  1800
+#define THROTTLE_MIN  700
 ////////////////////////////////////////////////////////////
 
 #include<Servo.h>
 Servo m1,m2,m3,m4;
 boolean blinkState;
+float batteryVoltage;
 
 /////////MPU OBJECT////2
 MPU6050 mpu;
@@ -22,7 +23,7 @@ MPU6050 mpu;
 
 ///////////////////////////VARIABLES///////////////////////////////////////////////////////////3
 
-long int a,b,c,start,start1,stopp, timer,value=1000,valuefr=0,valuebr=0,valuebl=0,valuefl=0,count;
+long int a,b,c,start,start1,stopp, timer,value,valuefr=0,valuebr=0,valuebl=0,valuefl=0,count;
 char chara;
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -48,9 +49,9 @@ float pid_i_mem_pitch=0, pid_pitch_setpoint=0, dmp_pitch_input=0, pid_output_pit
 float pid_i_mem_yaw=0, pid_yaw_setpoint=0, dmp_yaw_input=0, pid_output_yaw=0, pid_last_yaw_d_error=0;
 
 //PID gain and limit settings
-float pid_p_gain_roll = 7.95;               //Gain setting for the roll P-controller (150)
-float pid_i_gain_roll =0;              //Gain setting for the roll I-controller (1)
-float pid_d_gain_roll =0;                //Gain setting for the roll D-controller (750
+float pid_p_gain_roll = 100;               //Gain setting for the roll P-controller (1.3)
+float pid_i_gain_roll = 0.1;              //Gain setting for the roll I-controller (0.3)
+float pid_d_gain_roll = 0.01;                //Gain setting for the roll D-controller (15)
 int pid_max_roll = 400;                    //Maximum output of the PID-controller (+/-)
 
 float pid_p_gain_pitch = pid_p_gain_roll;  //Gain setting for the pitch P-controller.
@@ -58,9 +59,9 @@ float pid_i_gain_pitch = pid_i_gain_roll;  //Gain setting for the pitch I-contro
 float pid_d_gain_pitch = pid_d_gain_roll;  //Gain setting for the pitch D-controller.
 int pid_max_pitch = pid_max_roll;          //Maximum output of the PID-controller (+/-)
 
-float pid_p_gain_yaw = 4.0*M_PI/90;                //Gain setting for the pitch P-controller. //4.0
-float pid_i_gain_yaw = 0.02*M_PI/90;               //Gain setting for the pitch I-controller. //0.02
-float pid_d_gain_yaw = 1*M_PI/90;                //Gain setting for the pitch D-controller.
+float pid_p_gain_yaw = 4.0;                //Gain setting for the pitch P-controller. //4.0
+float pid_i_gain_yaw = 0.02;               //Gain setting for the pitch I-controller. //0.02
+float pid_d_gain_yaw = 1;                //Gain setting for the pitch D-controller.
 int pid_max_yaw = 400;                     //Maximum output of the PID-controller (+/-)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,12 +82,12 @@ void dmpDataReady() {
 /////////////////////SETTING STUFF UP/////////////////////////////////////////////////////////////////////////////////////////
 void setup() {
 	
-m1.attach(3,1000,2000);
-m2.attach(4,1000,2000);
-m3.attach(6,1000,2000);
-m4.attach(7,1000,2000);
+m1.attach(3);
+m2.attach(4);
+m3.attach(6);
+m4.attach(7);
 	
-	
+	batteryVoltage=analogRead(5)/1011*1.7;
 	
 	
 	//////////////INITIAL1ZING COMMUNICATIONS////////////5
@@ -111,17 +112,16 @@ m4.attach(7,1000,2000);
 	////////////////////////////////////////////////////
   
   ////////////////ACTIVATING ESCS/////////////////8
-  
-  m1.write(180);
-  m2.write(180);
-  m3.write(180);
-  m4.write(180);
+  m1.writeMicroseconds(2400);
+  m2.writeMicroseconds(2400);
+  m3.writeMicroseconds(2400);
+  m4.writeMicroseconds(2400);
   delay(2000);
-  m1.write(0);
-  m2.write(0);
-  m3.write(0);
-  m4.write(0);
-  //delay(10000);
+  m1.writeMicroseconds(580);
+  m2.writeMicroseconds(580);
+  m3.writeMicroseconds(580);
+  m4.writeMicroseconds(580);
+  delay(10000);
 
 	///////////MPU STUFF////////////////////7
 	mpu.initialize();
@@ -141,12 +141,12 @@ m4.attach(7,1000,2000);
 	//Your offsets: -1097 2131  2489  76  -82 9
 
 
-	mpu.setXAccelOffset(-987);
-	mpu.setYAccelOffset(2201);
-	mpu.setZAccelOffset(2596);
-	mpu.setXGyroOffset(68);
-	mpu.setYGyroOffset(-84);
-	mpu.setZGyroOffset(21);
+	mpu.setXAccelOffset(-1097);
+	mpu.setYAccelOffset(2131);
+	mpu.setZAccelOffset(2489);
+	mpu.setXGyroOffset(76);
+	mpu.setYGyroOffset(-82);
+	mpu.setZGyroOffset(9);
 	/////////////////////////////////////////
  
 }
@@ -160,7 +160,7 @@ m4.attach(7,1000,2000);
 void loop()
 {  
 
-	if (!dmpReady) return;
+	if (!dmpReady||batteryVoltage<6.5) return;
 
 
     // wait for MPU interrupt or extra packet(s) available
@@ -177,45 +177,42 @@ void loop()
     chara=Serial.read();
     if (chara == 'p')
     {
-      pid_p_gain_roll+=0.05;
-      pid_p_gain_pitch+=.05;
-      Serial.println(pid_p_gain_pitch,DEC);
+      pid_p_gain_roll+=10;
+      pid_p_gain_pitch+=10;
+      Serial.println(pid_p_gain_roll,DEC);
     }
     else if (chara == 'o')
     {
-      pid_p_gain_roll-=0.05;
-      pid_p_gain_pitch-=.05;
-      Serial.println(pid_p_gain_pitch,DEC);
+      pid_p_gain_roll-=10;
+      pid_p_gain_pitch-=10;
+      Serial.println(pid_p_gain_roll,DEC);
     }
     else if (chara == 'i')
     {
-      pid_i_gain_roll+=.00001;
-      pid_i_gain_pitch+=.00001;
-      Serial.println(pid_i_gain_pitch,DEC);
+      pid_i_gain_roll+=.01;
+      pid_i_gain_pitch+=.01;
+      Serial.println(pid_i_gain_roll,DEC);
     }
     else if (chara == 'u')
     {
-      pid_i_gain_roll-=.00001;
-      pid_i_gain_pitch-=.00001;
-      Serial.println(pid_i_gain_pitch,DEC);
+      pid_i_gain_roll-=.01;
+      pid_i_gain_pitch-=.01;
+      Serial.println(pid_i_gain_roll,DEC);
     }
     else if (chara == 'd')
     {
       pid_d_gain_roll+=10;
       pid_d_gain_pitch+=10;
-      Serial.println(pid_d_gain_pitch,DEC);
+      Serial.println(pid_d_gain_roll,DEC);
     }
     else if (chara == 's')
     {
       pid_d_gain_roll-=10;
       pid_d_gain_pitch-=10;
-      Serial.println(pid_d_gain_pitch,DEC);
+      Serial.println(pid_d_gain_roll,DEC);
     }
     else if(chara=='a')
     {
-      Serial.println(pid_p_gain_pitch,DEC);
-      Serial.println(pid_i_gain_pitch,DEC);
-      Serial.println(pid_d_gain_pitch,DEC);
       Serial.println(pid_p_gain_roll,DEC);
       Serial.println(pid_i_gain_roll,DEC);
       Serial.println(pid_d_gain_roll,DEC);
@@ -229,19 +226,6 @@ void loop()
     {
       value-=10;
       Serial.println(value,DEC);
-    }
-    else if(chara='q')
-    {
-      value=1000;
-      THROTTLE_MIN=1000;
-      Serial.println("Emergency Shutdown Sequence Initiated");
-      pid_p_gain_pitch=0;
-      pid_i_gain_pitch=0;
-      pid_d_gain_pitch=0;
-      pid_p_gain_roll=0;
-      pid_i_gain_roll=0;
-      pid_d_gain_roll=0;
-      
     }
   }
   /*else
@@ -269,26 +253,29 @@ void loop()
 
 
   //////////////////////ESC//////////////////////////12
-  //3=bl
-  //4=br
-  //6=fl
-  //7=fr
+  //7=br
+  //6=bl
+  //4=fr
+  //3=fl
   //clockwise yaw +ve
   //right roll +ve
   //backwards pitch +ve
-  valuebr=((   -pid_output_roll -   pid_output_pitch  ) ) + value;
+  batteryVoltage=batteryVoltage*.92+(analogRead(5)/1011*1.7);
+  if(batteryVoltage<
+  value=1200;
+  valuebr=((    -   pid_output_pitch  ) ) + value;
   if(valuebr<THROTTLE_MIN)valuebr=THROTTLE_MIN;if(valuebr>THROTTLE_MAX)valuebr=THROTTLE_MAX;
-  valuebl=((   +pid_output_roll-   pid_output_pitch  ) ) +value;
+  valuebl=((   -   pid_output_pitch  ) ) +value;
   if(valuebl<THROTTLE_MIN)valuebl=THROTTLE_MIN;if(valuebl>THROTTLE_MAX)valuebl=THROTTLE_MAX;
-  valuefr=((   -pid_output_roll+   pid_output_pitch )  ) +value;
+  valuefr=((   +   pid_output_pitch )  ) +value;
   if(valuefr<THROTTLE_MIN)valuefr=THROTTLE_MIN;if(valuefr>THROTTLE_MAX)valuefr=THROTTLE_MAX;
-  valuefl=((    +pid_output_roll+   pid_output_pitch  ) ) +value;
+  valuefl=((    +   pid_output_pitch  ) ) +value;
   if(valuefl<THROTTLE_MIN)valuefl=THROTTLE_MIN;if(valuefl>THROTTLE_MAX)valuefl=THROTTLE_MAX;
-  //Serial.print(valuebr);Serial.print('\t');Serial.print(valuebl);Serial.print('\t');Serial.print(valuefr);Serial.print('\t');Serial.println(valuefl);
-  m1.writeMicroseconds(valuebl);
-  m2.writeMicroseconds(valuebr);
-  m3.writeMicroseconds(valuefl);
-  m4.writeMicroseconds(valuefr);
+
+  m1.writeMicroseconds(valuefl);
+  m2.writeMicroseconds(valuefr);
+  m3.writeMicroseconds(valuebl);
+  m4.writeMicroseconds(valuebr);
   
 
 
@@ -326,6 +313,7 @@ void loop()
             mpu.dmpGetQuaternion(&q, fifoBuffer);
             mpu.dmpGetGravity(&gravity, &q);
             mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+            //Serial.print("ypr\t");
             
             
         // blink LED to indicate activity
@@ -348,9 +336,9 @@ void loop()
 //////////////////////////Subroutine to Calculate PID Controller Correction Values///////////////13
 void pid()
 {
-	dmp_roll_input = -ypr[2]*90/M_PI;
-	dmp_pitch_input = -ypr[1]*90/M_PI;
-	dmp_yaw_input = -ypr[0]*90/M_PI;
+	dmp_roll_input = -1*ypr[2] ;
+	dmp_pitch_input = ypr[1];
+	dmp_yaw_input = -1*ypr[0];
 	//Roll calculations
 	pid_error_temp =dmp_roll_input - pid_roll_setpoint;
  pid_i_mem_roll += pid_i_gain_roll * pid_error_temp;
@@ -372,6 +360,7 @@ void pid()
   pid_output_pitch = pid_p_gain_pitch * pid_error_temp + pid_i_mem_pitch + pid_d_gain_pitch * (pid_error_temp - pid_last_pitch_d_error);
   if(pid_output_pitch > pid_max_pitch)pid_output_pitch = pid_max_pitch;
   else if(pid_output_pitch < pid_max_pitch * -1)pid_output_pitch = pid_max_pitch * -1;
+  
   pid_last_pitch_d_error = pid_error_temp;
   
   //Yaw calculations
@@ -385,7 +374,11 @@ void pid()
   else if(pid_output_yaw < pid_max_yaw * -1)pid_output_yaw = pid_max_yaw * -1;
   
   pid_last_yaw_d_error = pid_error_temp;
-            
-            
+            /*Serial.print(pid_output_yaw);
+            Serial.print("\t");
+            Serial.print(pid_output_pitch);
+            Serial.print("\t");
+            Serial.println(pid_output_roll);
+*/
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
