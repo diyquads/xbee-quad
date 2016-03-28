@@ -23,7 +23,7 @@ MPU6050 mpu;
 ///////////////////////////VARIABLES///////////////////////////////////////////////////////////3
 
 long int a,b,c,start,start1,stopp, timer,value=1000,valuefr=0,valuebr=0,valuebl=0,valuefl=0,count;
-float change=0.01,smoothx,smoothy,smoothz;
+float change=0.01,smoothx,smoothy,smoothz,gyrox_temp=0,gyroy_temp,gyroz_temp;
 char chara,set='p';
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
@@ -33,7 +33,7 @@ uint16_t packetSize;    // expected DMP packet size (default is 42 bytes)
 uint16_t fifoCount;     // count of all bytes currently in FIFO
 uint8_t fifoBuffer[64]; // FIFO storage buffera
 int16_t ax,ay,az,gx,gy,gz;
- 
+
 // orientation/motion vars
 Quaternion q;           // [w, x, y, z]         quaternion container
 VectorInt16 aa;         // [x, y, z]            accel sensor measurements
@@ -58,37 +58,37 @@ float pidrate_i_mem_yaw=0, pidrate_yaw_setpoint=0, pidrate_output_yaw=0, pidrate
 
 
 //PID gain and limit settings
-float pid_p_gain_roll = 15;               //Gain setting for the roll P-controller (150)
+float pid_p_gain_roll =0;               //Gain setting for the roll P-controller (150)
 float pid_i_gain_roll =0;              //Gain setting for the roll I-controller (1)
 float pid_d_gain_roll =0;                //Gain setting for the roll D-controller (750
-int pid_max_roll = 10000;                    //Maximum output of the PID-controller (+/-)
+int pid_max_roll = 100;                    //Maximum output of the PID-controller (+/-)
 
-float pid_p_gain_pitch = 15;  //Gain setting for the pitch P-controller.
+float pid_p_gain_pitch = 0;  //Gain setting for the pitch P-controller.
 float pid_i_gain_pitch = 0;  //Gain setting for the pitch I-controller.
 float pid_d_gain_pitch = 0;  //Gain setting for the pitch D-controller.
-int pid_max_pitch = pid_max_roll;          //Maximum output of the PID-controller (+/-)
+int pid_max_pitch = 100;          //Maximum output of the PID-controller (+/-)
 
 float pid_p_gain_yaw = 0;                //Gain setting for the pitch P-controller. //4.0
 float pid_i_gain_yaw = 0;               //Gain setting for the pitch I-controller. //0.02
 float pid_d_gain_yaw = 0;                //Gain setting for the pitch D-controller.
-int pid_max_yaw = 10000;                     //Maximum output of the PID-controller (+/-)
+int pid_max_yaw = 100;                     //Maximum output of the PID-controller (+/-)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //PIDrate gain and limit settings
-float pidrate_p_gain_roll =0.09;               //Gain setting for the roll P-controller (150)
+float pidrate_p_gain_roll =0;               //Gain setting for the roll P-controller (150)
 float pidrate_i_gain_roll =0;              //Gain setting for the roll I-controller (1)
-float pidrate_d_gain_roll =15;                //Gain setting for the roll D-controller (750
-int pidrate_max_roll = 100;                    //Maximum output of the PID-controller (+/-)
+float pidrate_d_gain_roll =0;                //Gain setting for the roll D-controller (750
+int pidrate_max_roll = 400;                    //Maximum output of the PID-controller (+/-)
 
-float pidrate_p_gain_pitch =0.09;  //Gain setting for the pitch P-controller.
+float pidrate_p_gain_pitch =0;  //Gain setting for the pitch P-controller.
 float pidrate_i_gain_pitch = 0;  //Gain setting for the pitch I-controller.
-float pidrate_d_gain_pitch = 15;  //Gain setting for the pitch D-controller.
+float pidrate_d_gain_pitch = 0;  //Gain setting for the pitch D-controller.
 int pidrate_max_pitch = pidrate_max_roll;          //Maximum output of the PID-controller (+/-)
 
-float pidrate_p_gain_yaw = .1;                //Gain setting for the pitch P-controller. //4.0
+float pidrate_p_gain_yaw = 1;                //Gain setting for the pitch P-controller. //4.0
 float pidrate_i_gain_yaw = 0;               //Gain setting for the pitch I-controller. //0.02
 float pidrate_d_gain_yaw = 0;                //Gain setting for the pitch D-controller.
-int pidrate_max_yaw = 100;
+int pidrate_max_yaw = 400;
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -304,16 +304,16 @@ void loop()
 				pidrate_p_gain_pitch=0;
 				pidrate_i_gain_pitch=0;
 				pidrate_d_gain_pitch=0;
-			  pid_p_gain_roll=0;
-        pid_i_gain_roll=0;
-        pid_d_gain_roll=0;
-        pidrate_p_gain_roll=0;
-        pidrate_i_gain_roll=0;
-        pidrate_d_gain_roll=0;
-			  pid_pitch_setpoint=0;
-        pid_roll_setpoint=0;
-        pid_yaw_setpoint=0;
-        
+				pid_p_gain_roll=0;
+				pid_i_gain_roll=0;
+				pid_d_gain_roll=0;
+				pidrate_p_gain_roll=0;
+				pidrate_i_gain_roll=0;
+				pidrate_d_gain_roll=0;
+				pid_pitch_setpoint=0;
+				pid_roll_setpoint=0;
+				pid_yaw_setpoint=0;
+				
 			}
 			else if(chara=='z')
 			{
@@ -357,24 +357,23 @@ void loop()
 				pid_pitch_setpoint=0;
 				pid_roll_setpoint=0;
 				pid_yaw_setpoint=0;
-				
 			}
-     else if(chara=='b')
-     {
-      gyro_x_input+=100;
-     }
-     else if(chara=='v')
-     {
-      gyro_x_input-=100;
-     }
-     else if(chara=='f')
-     {
-      gyro_y_input+=100;
-     }
-     else if(chara=='c')
-     {
-      gyro_y_input-=100;
-     }
+			else if(chara=='b')
+			{
+				gyro_x_input+=500;
+			}
+			else if(chara=='v')
+			{
+				gyro_x_input-=500;
+			}
+			else if(chara=='f')
+			{
+				gyro_y_input+=500;
+			}
+			else if(chara=='c')
+			{
+				gyro_y_input-=500;
+			}
 		}
 		/*else
 {
@@ -392,13 +391,12 @@ else
 pid_yaw_setpoint = 0;
 }
 *////////////////////////////////////////////////////////////////////////
-
 		//////////////////////CALL PID/////////////////////////////////////11
 		pid();
 		pidrate();
 		//Serial.print(pid_output_yaw);Serial.print('\t');Serial.print(pid_output_pitch);Serial.print('\t');Serial.println(pid_output_roll);
 		/////////////////////////////////////////////////////////////////////
-
+		
 
 		//////////////////////ESC//////////////////////////12
 		//3=bl
@@ -408,9 +406,9 @@ pid_yaw_setpoint = 0;
 		//clockwise yaw +ve
 		//right roll +ve
 		//backwards pitch +ve
-   //ccw gyroz +ve
-   //right gyrox +ve
-   //forward gyroy +ve
+		//ccw gyroz +ve
+		//right gyrox +ve
+		//forward gyroy +ve
 		valuebr=(     -pidrate_output_yaw    +pidrate_output_roll     -pidrate_output_pitch   ) + value;
 		if(valuebr<THROTTLE_MIN)valuebr=THROTTLE_MIN;if(valuebr>THROTTLE_MAX)valuebr=THROTTLE_MAX;
 		valuebl=(     +pidrate_output_yaw     -pidrate_output_roll     -pidrate_output_pitch   ) +value;
@@ -436,8 +434,6 @@ pid_yaw_setpoint = 0;
 			m3.writeMicroseconds(1000);
 			m4.writeMicroseconds(1000); 
 		}
-
-
 	}
 	// reset interrupt flag and get INT_STATUS byte
 	mpuInterrupt = false;
@@ -469,7 +465,11 @@ pid_yaw_setpoint = 0;
 		fifoCount -= packetSize;
 
 		// display Euler angles in degrees
+		
 		mpu.getRotation(&gx,&gy,&gz);
+		gyrox_temp=(gyrox_temp+gx)/2;
+   gyroy_temp=(gyroy_temp+gy)/2;
+   gyroz_temp=(gyroz_temp+gz)/2;
 		mpu.dmpGetQuaternion(&q, fifoBuffer);
 		mpu.dmpGetGravity(&gravity, &q);
 		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
@@ -541,13 +541,14 @@ void pid()
 void pidrate()
 {
 
-	gyro_x_input=(float)(gyro_x_input*.99)+(gx*0.01);
-	gyro_y_input=(float)(gyro_y_input*.99)+(gy*0.01);
-	gyro_z_input=(float)(gyro_z_input*.99)+(gz*0.01);
-  smoothx=(smoothx*.8)+(pid_output_roll*.2);
-  smoothy=(smoothy*.8)+(pid_output_pitch*.2);
-  smoothz=(smoothz*.8)+(pid_output_yaw*.2);
-  //Serial.print(mpu_x_input);Serial.print('\t');Serial.print(mpu_y_input);Serial.print('\t');Serial.println(mpu_z_input);
+	gyro_x_input=(gyro_x_input*.8)+(gyrox_temp*0.2);
+	gyro_y_input=(gyro_y_input*.8)+(gyroy_temp*0.2);
+	gyro_z_input=(gyro_z_input*.8)+(gyroz_temp*0.2);
+	smoothx=(smoothx*.99)+(pid_output_roll*.01);
+	smoothy=(smoothy*.99)+(pid_output_pitch*.01);
+	smoothz=(smoothz*.99)+(pid_output_yaw*.01);
+	//Serial.print(gyro_x_input);Serial.print('\t');Serial.print(gyro_y_input);Serial.print('\t');
+	//Serial.println(gyro_x_input);
 	
 	pidrate_error_temp =gyro_x_input + smoothx;
 	pidrate_i_mem_roll += pidrate_i_gain_roll * pidrate_error_temp;
@@ -559,7 +560,7 @@ void pidrate()
 	else if(pidrate_output_roll < pidrate_max_roll * -1)pidrate_output_roll = pidrate_max_roll * -1;
 
 	pidrate_last_roll_d_error = pidrate_error_temp;
- 
+
 	//Pitch calculations
 	pidrate_error_temp = gyro_y_input - smoothy;
 	pidrate_i_mem_pitch += pidrate_i_gain_pitch * pidrate_error_temp;
@@ -582,6 +583,6 @@ void pidrate()
 	else if(pidrate_output_yaw < pidrate_max_yaw * -1)pidrate_output_yaw = pidrate_max_yaw * -1;
 
 	pidrate_last_yaw_d_error = pidrate_error_temp;
-  //Serial.print(pid_output_pitch);Serial.print('\t');Serial.println(-pidrate_output_pitch);
+	//Serial.print(pid_output_pitch);Serial.print('\t');Serial.println(-pidrate_output_pitch);
 }
 
